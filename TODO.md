@@ -1,0 +1,2 @@
+- [ ] Search component (for auto-complete the list of services) based on datalist tag
+- [ ] Output component (based on output tag) to show the generated password

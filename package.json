@@ -3,16 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.15",
-    "@types/node": "12.0.8",
-    "@types/react": "16.8.21",
-    "@types/react-dom": "16.8.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "styled-components": "4.3.2",
     "typescript": "3.5.2"
   },
   "scripts": {
+    "pwa:off": "adb reverse --remove-all",
+    "pwa:on": "adb reverse --remove-all && adb reverse tcp:4000 tcp:3000",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -32,5 +31,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.15",
+    "@types/node": "12.0.8",
+    "@types/react": "16.8.21",
+    "@types/react-dom": "16.8.4",
+    "@types/styled-components": "4.1.16"
   }
 }

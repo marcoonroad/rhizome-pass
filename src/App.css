@@ -80,3 +80,30 @@ button:hover {
   padding-right: 2em;
   text-align: right;
 }
+
+.tab-selector {
+  text-decoration: none;
+  font-family: 'Inconsolata', monospace;
+  color: white;
+  display: block;
+  width: auto;
+  padding: 1em 1em;
+}
+
+.tab-wrapper {
+  display: flex;
+}
+
+.tab-wrapper:active {
+  background-color: #282c34;
+}
+
+.tab-wrapper:hover {
+  background-color: #282c34;
+  transition: 0.5s;
+}
+
+.tab-wrapper:focus {
+  background-color: #282c34;
+  transition: 0.5s;
+}

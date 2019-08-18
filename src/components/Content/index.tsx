@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import Crypto from '../../crypto'
 import Password from '../Password'
@@ -54,7 +55,38 @@ const FooterContent = styled(Div)`
   margin: 0 auto;
 `
 
-const Content : React.FC = () => {
+const NavDiv = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`
+
+const Ul = styled.ul`
+  display: flex;
+  width: 100%;
+`
+
+const Li = styled.li`
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+`
+
+const HeaderNav : React.FC = function () {
+  return (
+    <NavDiv>
+      <Ul>
+        <Li className='tab-wrapper'>
+          <Link to='/' className='tab-selector' title='Home'>Home</Link>
+        </Li>
+        <Li className='tab-wrapper'>
+          <Link to='/about' className='tab-selector' title='About'>About</Link>
+        </Li>
+      </Ul>
+    </NavDiv>
+  )
+}
+
+const FormContent : React.FC = () => {
   const passwordId = 'master-password-id'
   const optionsId = 'external-services-id'
 
@@ -88,22 +120,50 @@ const Content : React.FC = () => {
   }
 
   return (
+    <Form className={'form-container'}>
+      <Password customRef={masterPasswordRef}
+        labelId={passwordId} visible={false} value={''} label={'Master Password'}
+        className={'form-component'} /><br/>
+      <Options customRef={serviceRef}
+        optionsId={optionsId} values={servicesList} label={'External Service'}
+        className={'form-component'} /><br/>
+      <Button onClick={generatePassword}
+        className={'form-component'}>GENERATE</Button><br/><br/>
+      <Output value={current.password}
+        className={'form-component'}/><br/>
+      <Button onClick={refreshPassword}
+        className={'form-component'}>REFRESH</Button>
+    </Form>
+  )
+}
+
+const AboutContent : React.FC = () => {
+  return (
+    <div>
+      <p>
+        Fountain Pass is an offline password manager/generator
+        developed by marcoonroad at gmail dot com.
+      </p>
+    </div>
+  )
+}
+
+const Content : React.FC = () => {
+  return (
     <Div id={'content'}>
       <Header title={'Fountain'} subtitle={'Offline Password Manager'}/>
-      <Form className={'form-container'}>
-        <Password customRef={masterPasswordRef}
-          labelId={passwordId} visible={false} value={''} label={'Master Password'}
-          className={'form-component'} /><br/>
-        <Options customRef={serviceRef}
-          optionsId={optionsId} values={servicesList} label={'External Service'}
-          className={'form-component'} /><br/>
-        <Button onClick={generatePassword}
-          className={'form-component'}>GENERATE</Button><br/><br/>
-        <Output value={current.password}
-          className={'form-component'}/><br/>
-        <Button onClick={refreshPassword}
-          className={'form-component'}>REFRESH</Button>
-      </Form>
+
+
+      <Router>
+        <div>
+          <HeaderNav/>
+
+          <Route exact path="/" component={FormContent} />
+          <Route path="/about" component={AboutContent} />
+        </div>
+      </Router>
+
+
       <Footer>
         <FooterContent>
           <span className={'footer-text'}>@marcoonroad - 2019 copyleft</span>

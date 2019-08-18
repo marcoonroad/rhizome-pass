@@ -30,20 +30,22 @@ const DefaultLabel = styled.label`
   font-family: 'Inconsolata', monospace;
   display: inline-block;
   padding: 0.75em;
+
+  display: block !important;
 `
 
 const Label = DefaultLabel
 
 const Button = styled(DefaultButton)`
   border-radius: 0px 5px 5px 0px;
-  margin-left: 0px;
   width: 25%;
+  display: block;
 `
 
 const Input = styled(DefaultInput)`
   border-radius: 5px 0px 0px 5px;
-  margin-right: 0px;
-  width: auto;
+  width: 75%;
+  display: block;
 `
 
 interface IPassword {
@@ -51,6 +53,7 @@ interface IPassword {
   value : string,
   label : string,
   labelId : string,
+  className : string,
   customRef : React.RefObject<HTMLInputElement>
 }
 
@@ -98,9 +101,9 @@ const Password : React.FC<IPassword> = (initialPassword) => {
   }, [currentPassword.visible])
 
   return (
-    <div>
-      <Label htmlFor={id}>{initialPassword.label}</Label><br/>
-      <div>
+    <div className={initialPassword.className}>
+      <Label htmlFor={id}>{initialPassword.label}</Label>
+      <div className={'horizontal-stack'}>
         <Input
           id={id}
           type={inputType}

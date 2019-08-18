@@ -43,3 +43,27 @@
 body {
   background-color: #444455;
 }
+
+.form-component {
+  display: block;
+  margin: 0 auto;
+  padding: 0px 0px;
+}
+
+.form-container {
+
+}
+
+button.form-component {
+  width: 100% !important;
+}
+
+.horizontal-stack {
+  width: 100% !important;
+  display: flex !important;
+}
+
+button:hover {
+  background-color: #4CAF50;
+  font-weight: bold;
+}

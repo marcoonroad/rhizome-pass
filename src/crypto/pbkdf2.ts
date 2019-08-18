@@ -1,7 +1,7 @@
 import Bytes from './bytes'
 import digest from './hash'
 
-const CYCLES = 1000 // 00
+const CYCLES = 1000 // 10000000
 
 function getKeyMaterial(password : string) {
   return window.crypto.subtle.importKey(

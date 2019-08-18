@@ -20,7 +20,6 @@ border-radius: 5px;
 `
 
 const Button = styled(DefaultButton)`
-  width: 100%;
   margin: 5px;
   margin-left: 0px;
   margin-right: 5px;
@@ -32,10 +31,11 @@ const servicesList = [
 
 const Form = styled.form`
   padding-top: 25px;
-  width: 90%;
   margin: 0 auto;
   display: block;
   margin-bottom: 50px;
+
+  width: 80%;
 `
 
 const Div = styled.div`
@@ -70,21 +70,26 @@ const Content : React.FC = () => {
     update({ ...current, password: newPassword })
   }
 
-  const refreshPassword = function () {
-
+  const refreshPassword = function (event : any) {
+    event.preventDefault()
   }
 
   return (
     <Div id={'content'}>
       <Header title={'Fountain'} subtitle={'Offline Password Manager'}/>
-      <Form>
+      <Form className={'form-container'}>
         <Password customRef={masterPasswordRef}
-          labelId={passwordId} visible={false} value={''} label={'Master Password'}/><br/>
+          labelId={passwordId} visible={false} value={''} label={'Master Password'}
+          className={'form-component'} /><br/>
         <Options customRef={serviceRef}
-          optionsId={optionsId} values={servicesList} label={'External Service'}/><br/>
-        <Button onClick={generatePassword}>GENERATE</Button><br/><br/>
-        <Output value={current.password} /><br/>
-        <Button onClick={refreshPassword}>REFRESH</Button>
+          optionsId={optionsId} values={servicesList} label={'External Service'}
+          className={'form-component'} /><br/>
+        <Button onClick={generatePassword}
+          className={'form-component'}>GENERATE</Button><br/><br/>
+        <Output value={current.password}
+          className={'form-component'}/><br/>
+        <Button onClick={refreshPassword}
+          className={'form-component'}>REFRESH</Button>
       </Form>
     </Div>
   )

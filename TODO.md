@@ -1,2 +1,8 @@
 - [ ] Search component (for auto-complete the list of services) based on datalist tag
-- [ ] Output component (based on output tag) to show the generated password
+- [ ] Output component (based on output tag) to show the generated password (não funfa seleção pra copiar, furada?)
+- [ ] Modal sweet alert pra loading ("é um processo um pouco lento por questões de segurança, aguarde").
+- [ ] Campo pra nome de usuário? Provavelmente sim.
+- [ ] Guardar token pra salting de KDF? Provavelmente não.
+- [ ] Exportar token de salt junto com blacklist de senhas refreshed? Provavelmente só blacklist.
+- [ ] Refresh por HMAC-like PRF que blacklisteia nonces já usados por máscaras hash da imagem PRF.
+- [ ] Mecanismo de sincronização de imagens PRF de blacklist?

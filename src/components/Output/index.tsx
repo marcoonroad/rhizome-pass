@@ -27,21 +27,22 @@ border-radius: 5px;
 
 const Button = styled(DefaultButton)`
   border-radius: 0px 5px 5px 0px;
-  margin-left: 0px;
   width: 25%;
+  display: block;
 `
 
 const StyledOutput = styled(DefaultOutput)`
   border-radius: 5px 0px 0px 5px;
-  margin-right: 0px;
-  width: auto;
+  width: 75%;
+  display: block;
 `
 
 interface IOutput {
-  value : string
+  value : string,
+  className : string
 }
 
-const Output : React.SFC<IOutput> = ({ value }) => {
+const Output : React.SFC<IOutput> = ({ value, className }) => {
   const passwordOutput = React.useRef<HTMLInputElement>(null);
 
   const copyContent = (event : any) => {
@@ -65,7 +66,7 @@ const Output : React.SFC<IOutput> = ({ value }) => {
   }
 
   return (
-    <div>
+    <div className={`${className} horizontal-stack`}>
       <StyledOutput
         ref={passwordOutput}
         readOnly

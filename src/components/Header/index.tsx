@@ -1,11 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const DefaultHeader = styled.h1`
-  font-family: 'Inconsolata', monospace;
-`
-
-const StyledHeader = styled(DefaultHeader)`
+const StyledHeader = styled.h1`
   color: white;
   font-family: 'Inconsolata', monospace;
   font-size: 2em;
@@ -30,7 +26,6 @@ const StyledSubtitle = styled.h3`
   font-family: 'Inconsolata', monospace;
   font-size: 1.1em;
   text-align: center;
-  font-weight: none;
   font-style: italic;
 `
 

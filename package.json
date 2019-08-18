@@ -9,16 +9,34 @@
     "styled-components": "4.3.2",
     "typescript": "3.5.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/marcoonroad/fountain.git"
+  },
+  "homepage": "https://fountain-pass.surge.sh",
+  "author": "Marco Aurélio da Silva <marcoonroad@gmail.com>",
+  "license": "MIT",
   "scripts": {
+    "predeploy": "yarn run build",
+    "deploy": "surge --project ./build --domain https://fountain-pass.surge.sh",
     "pwa:off": "adb reverse --remove-all",
     "pwa:on": "adb reverse --remove-all && adb reverse tcp:4000 tcp:3000",
+    "prestart": "yarn run pwa:on",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "hooks:pre-commit": "echo 'Do nothing by now...'",
+    "hooks:pre-push": "echo 'Do nothing by now...'"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run hooks:pre-commit",
+      "pre-push": "yarn run hooks:pre-push"
+    }
   },
   "browserslist": {
     "production": [
@@ -37,6 +55,8 @@
     "@types/node": "12.0.8",
     "@types/react": "16.8.21",
     "@types/react-dom": "16.8.4",
-    "@types/styled-components": "4.1.16"
+    "@types/styled-components": "4.1.16",
+    "husky": "3.0.4",
+    "surge": "0.21.3"
   }
 }

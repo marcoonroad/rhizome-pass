@@ -6,6 +6,8 @@ const DefaultLabel = styled.label`
   font-family: 'Inconsolata', monospace;
   display: inline-block;
   padding: 0.75em;
+
+  display: block !important;
 `
 
 const DefaultInput = styled.input`
@@ -23,15 +25,17 @@ const DefaultInput = styled.input`
 const Label = DefaultLabel
 
 const Input = styled(DefaultInput)`
-  display: inline-block;
-  width: auto;
   margin: 0 auto;
+  display: block;
+  width: 100%;
 `
+
 
 interface IOptions {
   label : string,
   values : Array<string>,
   optionsId : string,
+  className : string,
   customRef : React.RefObject<HTMLInputElement>
 }
 
@@ -58,16 +62,16 @@ const asKey = (value : string) => value.toLowerCase().replace(/\s/g, '-')
 const asOption = (value : string) =>
   <option value={value} key={asKey(value)}>{value}</option>
 
-const Options : React.FC<IOptions> = ({ values, label, optionsId, customRef }) => {
+const Options : React.FC<IOptions> = ({ values, label, optionsId, customRef, className }) => {
   const labelId = `${optionsId}-label`
   const listId = `${optionsId}-list`
 
   // const firstValue = values[0]
   return (
-    <div>
-      <Label htmlFor={labelId}>{label}</Label><br/>
-      <div>
-        <Input list={listId} id={labelId} ref={customRef}/><br/>
+    <div className={className}>
+      <Label htmlFor={labelId}>{label}</Label>
+      <div className={'horizontal-stack'}>
+        <Input list={listId} id={labelId} ref={customRef}/>
         <datalist id={listId}>{values.map(asOption)}</datalist>
       </div>
     </div>

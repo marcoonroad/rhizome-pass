@@ -41,6 +41,19 @@ const Form = styled.form`
 const Div = styled.div`
 `
 
+const Footer = styled(Div)`
+  flex-grow: 0;
+  display: flex;
+  background-color: #282c34;
+  padding-bottom: 1em;
+  padding-top: 1.5em;
+`
+
+const FooterContent = styled(Div)`
+  width: 80%;
+  margin: 0 auto;
+`
+
 const Content : React.FC = () => {
   const passwordId = 'master-password-id'
   const optionsId = 'external-services-id'
@@ -91,6 +104,11 @@ const Content : React.FC = () => {
         <Button onClick={refreshPassword}
           className={'form-component'}>REFRESH</Button>
       </Form>
+      <Footer>
+        <FooterContent>
+          <span className={'footer-text'}>@marcoonroad - 2019 copyleft</span>
+        </FooterContent>
+      </Footer>
     </Div>
   )
 }

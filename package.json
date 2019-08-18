@@ -19,9 +19,10 @@
   "scripts": {
     "predeploy": "yarn run build",
     "deploy": "surge --project ./build --domain https://fountain-pass.surge.sh",
-    "pwa:off": "adb reverse --remove-all",
-    "pwa:on": "adb reverse --remove-all && adb reverse tcp:4000 tcp:3000",
-    "prestart": "yarn run pwa:on",
+    "android:off": "adb reverse --remove-all",
+    "android:on": "adb reverse --remove-all && adb reverse tcp:4000 tcp:3000",
+    "predebug": "yarn run android:on && echo 'Device is listening at http://localhost:4000 address...'",
+    "debug": "yarn run start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

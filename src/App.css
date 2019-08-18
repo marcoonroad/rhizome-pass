@@ -40,6 +40,10 @@
 }
 */
 
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: #444455;
 }
@@ -51,7 +55,7 @@ body {
 }
 
 .form-container {
-
+  flex-grow: 1;
 }
 
 button.form-component {
@@ -66,4 +70,13 @@ button.form-component {
 button:hover {
   background-color: #4CAF50;
   font-weight: bold;
+}
+
+.footer-text {
+  display: inline-block;
+  width: 100%;
+  margin: 0 auto;
+  color: white;
+  padding-right: 2em;
+  text-align: right;
 }

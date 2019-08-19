@@ -20,6 +20,8 @@
   "scripts": {
     "predeploy": "yarn run build",
     "deploy": "surge --project ./build --domain https://fountain-pass.surge.sh",
+    "predeploy:prod": "yarn run build",
+    "deploy:prod": "gh-pages -b gh-pages -d ./build",
     "android:off": "adb reverse --remove-all",
     "android:on": "adb reverse --remove-all && adb reverse tcp:4000 tcp:3000",
     "predebug": "yarn run android:on && echo 'Device is listening at http://localhost:4000 address...'",
@@ -59,6 +61,7 @@
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "4.3.4",
     "@types/styled-components": "4.1.16",
+    "gh-pages": "2.1.1",
     "husky": "3.0.4",
     "surge": "0.21.3"
   }

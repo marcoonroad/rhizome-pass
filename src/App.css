@@ -132,3 +132,11 @@ button:hover {
 .invisible {
   display: none !important;
 }
+
+body * {
+  font-family: 'Inconsolata', monospace !important;
+}
+
+body > * {
+  font-family: 'Inconsolata', monospace !important;
+}

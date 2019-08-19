@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink, Switch, Redirect } from 'react-router-dom'
 
 import Crypto from '../../crypto'
 import Password from '../Password'
@@ -48,6 +48,9 @@ const Footer = styled(Div)`
   background-color: #282c34;
   padding-bottom: 1em;
   padding-top: 1.5em;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 `
 
 const FooterContent = styled(Div)`
@@ -76,10 +79,12 @@ const HeaderNav : React.FC = function () {
     <NavDiv>
       <Ul>
         <Li className='tab-wrapper'>
-          <Link to='/' className='tab-selector' title='Home'>Home</Link>
+          <NavLink to='/main' className='tab-selector' activeClassName='tab-selector-active'
+            title='Home'>Home</NavLink>
         </Li>
         <Li className='tab-wrapper'>
-          <Link to='/about' className='tab-selector' title='About'>About</Link>
+          <NavLink to='/about' className='tab-selector' activeClassName='tab-selector-active'
+            title='About'>About</NavLink>
         </Li>
       </Ul>
     </NavDiv>
@@ -131,7 +136,7 @@ const FormContent : React.FC = () => {
         className={'form-component'}>GENERATE</Button><br/><br/>
       <Output value={current.password}
         className={'form-component'}/><br/>
-      <Button onClick={refreshPassword}
+      <Button onClick={refreshPassword} style={{display: 'none'}}
         className={'form-component'}>REFRESH</Button>
     </Form>
   )
@@ -139,7 +144,7 @@ const FormContent : React.FC = () => {
 
 const AboutContent : React.FC = () => {
   return (
-    <div>
+    <div className='about-container'>
       <p>
         Fountain Pass is an offline password manager/generator
         developed by marcoonroad at gmail dot com.
@@ -158,8 +163,11 @@ const Content : React.FC = () => {
         <div>
           <HeaderNav/>
 
-          <Route exact path="/" component={FormContent} />
-          <Route path="/about" component={AboutContent} />
+          <Switch>
+            <Route path="/main" component={FormContent} />
+            <Route path="/about" component={AboutContent} />
+            <Route render={() => <Redirect to='/main' />} />
+          </Switch>
         </div>
       </Router>
 

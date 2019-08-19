@@ -88,22 +88,38 @@ button:hover {
   display: block;
   width: auto;
   padding: 1em 1em;
+  background-color: #444455;
 }
 
 .tab-wrapper {
   display: flex;
 }
 
-.tab-wrapper:active {
+.tab-selector-active {
+  text-decoration: none;
+  font-family: 'Inconsolata', monospace;
+  color: white;
+  display: block;
+  width: auto;
+  padding: 1em 1em;
   background-color: #282c34;
 }
 
-.tab-wrapper:hover {
-  background-color: #282c34;
-  transition: 0.5s;
+.tab-wrapper {
+  border-bottom-style: solid !important;
+  border-bottom-width: 5px !important;
+  border-bottom-color: #4CAF50 !important;
 }
 
-.tab-wrapper:focus {
-  background-color: #282c34;
-  transition: 0.5s;
+.about-container {
+  color: white;
+  font-family: 'Inconsolata', monospace;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 25px !important;
+}
+
+.about-container p {
+  padding: 0.75em 0.75em;
+  display: block;
 }

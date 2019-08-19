@@ -1,5 +1,7 @@
 import React from 'react'
 
+// TODO: abstract the whole animation as a separated component
+
 const lines = [
   'Fountain Pass is an offline password manager/generator',
   'developed by @marcoonroad (Marco Aurélio da Silva). This',
@@ -30,7 +32,6 @@ const AboutPage : React.FC = () => {
     }
 
     const timeout = setTimeout(() => {
-      console.log('Counter timeout triggered!')
       update(current => {
         const counter = Math.min(current.counter + 1, fullText.length)
         return { ...current, counter }

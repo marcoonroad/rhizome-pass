@@ -91,7 +91,6 @@ const Password : React.FC<IPassword> = (initialPassword) => {
     }
 
     const timeout = setTimeout(() => {
-      console.log('Timeout triggered!')
       setPassword(currentPassword => {
         return { ...currentPassword, visible: false }
       })

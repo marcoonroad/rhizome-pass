@@ -108,7 +108,7 @@ button:hover {
 
 .tab-wrapper {
   border-bottom-style: solid !important;
-  border-bottom-width: 5px !important;
+  border-bottom-width: 2px !important;
   border-bottom-color: #4CAF50 !important;
 }
 
@@ -127,4 +127,8 @@ button:hover {
 
 .text-link {
   color: white;
+}
+
+.invisible {
+  display: none !important;
 }

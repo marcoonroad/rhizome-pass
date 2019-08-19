@@ -79,6 +79,7 @@ button:hover {
   color: white;
   padding-right: 2em;
   text-align: right;
+  font-family: 'Inconsolata', monospace;
 }
 
 .tab-selector {
@@ -122,4 +123,8 @@ button:hover {
 .about-container p {
   padding: 0.75em 0.75em;
   display: block;
+}
+
+.text-link {
+  color: white;
 }

@@ -40,6 +40,7 @@ const Form = styled.form`
 const MainPage : React.FC = () => {
   const passwordId = 'master-password-id'
   const optionsId = 'external-services-id'
+  const outputId = 'generated-password-id'
   
   const [current, update] = React.useState({
     password: 'Teste talkey?'
@@ -81,6 +82,7 @@ const MainPage : React.FC = () => {
       <Button onClick={generatePassword}
         className={'form-component'}>GENERATE</Button><br/><br/>
       <Output value={current.password}
+        labelId={outputId} label={'Output Password'}
         className={'form-component'}/><br/>
       <Button onClick={refreshPassword} style={{display: 'none'}}
         className={'form-component'}>REFRESH</Button>

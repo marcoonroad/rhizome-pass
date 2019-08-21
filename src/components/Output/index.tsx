@@ -25,6 +25,17 @@ font-size: 16px;
 border-radius: 5px;
 `
 
+const DefaultLabel = styled.label`
+  color: white;
+  font-family: 'Inconsolata', monospace;
+  display: inline-block;
+  padding: 0.75em;
+
+  display: block !important;
+`
+
+const Label = DefaultLabel
+
 const Button = styled(DefaultButton)`
   border-radius: 0px 5px 5px 0px;
   width: 25%;
@@ -39,10 +50,12 @@ const StyledOutput = styled(DefaultOutput)`
 
 interface IOutput {
   value : string,
-  className : string
+  className : string,
+  label : string,
+  labelId : string
 }
 
-const Output : React.SFC<IOutput> = ({ value, className }) => {
+const Output : React.SFC<IOutput> = ({ value, className, label, labelId }) => {
   const passwordOutput = React.useRef<HTMLInputElement>(null);
 
   const copyContent = (event : any) => {
@@ -66,13 +79,17 @@ const Output : React.SFC<IOutput> = ({ value, className }) => {
   }
 
   return (
-    <div className={`${className} horizontal-stack`}>
-      <StyledOutput
-        ref={passwordOutput}
-        readOnly
-        value={value} />
-      <Button
-        onClick={copyContent}>COPY</Button>
+    <div className={`${className}`}>
+      <Label htmlFor={labelId}>{label}</Label>
+      <div className={'horizontal-stack'}>
+        <StyledOutput
+          id={labelId}
+          ref={passwordOutput}
+          readOnly
+          value={value} />
+        <Button
+          onClick={copyContent}>COPY</Button>
+      </div>
     </div>
   )
 }

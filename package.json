@@ -18,7 +18,7 @@
   "author": "Marco Aurélio da Silva <marcoonroad@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "predeploy": "yarn run build",
+    "predeploy": "yarn run build && mv build/index.html build/200.html",
     "deploy": "surge --project ./build --domain https://fountain-pass.surge.sh",
     "predeploy:prod": "yarn run build",
     "deploy:prod": "gh-pages -b gh-pages -d ./build",

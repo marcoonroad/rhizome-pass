@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Route, NavLink, Switch, Redirect } from 'react
 import Header from '../Header'
 
 import AboutContent from '../../pages/About'
-import FormContent from '../../pages/Main'
+import ManagerComponent from '../../pages/Manager'
+import GeneratorContent from '../../pages/Generator'
 
 const Footer = styled.div`
   flex-grow: 0;
@@ -44,8 +45,12 @@ const HeaderNav : React.FC = function () {
     <NavDiv>
       <Ul>
         <Li className='tab-wrapper'>
-          <NavLink to='/main' className='tab-selector' activeClassName='tab-selector-active'
-            title='Home'>Home</NavLink>
+          <NavLink to='/generator' className='tab-selector' activeClassName='tab-selector-active'
+            title='Generator'>Generator</NavLink>
+        </Li>
+        <Li className='tab-wrapper'>
+          <NavLink to='/manager' className='tab-selector' activeClassName='tab-selector-active'
+            title='Manager'>Manager</NavLink>
         </Li>
         <Li className='tab-wrapper'>
           <NavLink to='/about' className='tab-selector' activeClassName='tab-selector-active'
@@ -149,9 +154,10 @@ const Content : React.FC = () => {
           <HeaderNav/>
 
           <Switch>
-            <Route path="/main" component={FormContent} />
+            <Route path="/generator" component={GeneratorContent} />
+            <Route path="/manager" component={ManagerComponent} />
             <Route path="/about" component={AboutContent} />
-            <Route render={() => <Redirect to='/main' />} />
+            <Route render={() => <Redirect to='/generator' />} />
           </Switch>
         </div>
       </Router>

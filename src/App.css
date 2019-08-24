@@ -123,6 +123,8 @@ button:hover {
 .about-container p {
   padding: 0.75em 0.75em;
   display: block;
+  transition: 0.5s;
+  text-align: justify;
 }
 
 .text-link {
@@ -135,8 +137,14 @@ button:hover {
 
 body * {
   font-family: 'Inconsolata', monospace !important;
+  font-variant: small-caps !important;
 }
 
 body > * {
   font-family: 'Inconsolata', monospace !important;
+  font-variant: small-caps !important;
+}
+
+.manager-container p {
+  text-align: left !important;
 }

@@ -1,12 +1,17 @@
 import Storage from './storage'
 
-// === initialization =====================================
 const KEY = 'hash-blacklist'
-const blacklist = Storage.get(KEY)
 
-if (!blacklist) {
-  Storage.set(KEY, {})
+// === initialization =====================================
+const init = () => {
+  const blacklist = Storage.get(KEY)
+
+  if (!blacklist) {
+    Storage.set(KEY, {})
+  }
 }
+
+init()
 // ========================================================
 
 /*
@@ -16,6 +21,7 @@ const validate = (hashImage : string) => {
 */
 
 const add = (hashImage : string) => {
+  init()
   const blacklist = Storage.get(KEY)
 
   blacklist[ hashImage ] = true
@@ -23,9 +29,14 @@ const add = (hashImage : string) => {
   Storage.set(KEY, blacklist)
 }
 
-const get = () => Storage.get(KEY)
+const get = () => {
+  init()
+  return Storage.get(KEY)
+}
 
-const syncIn = (hashImages : string[]) => {
+const syncIn = (hashImagesInput : string) => {
+  init()
+  const hashImages = hashImagesInput.replace(/(\r|\n|\t|\s)/g, ' ').replace(/\s\s+/g, ' ').split(' ')
   const blacklist = Storage.get(KEY)
 
   for (let index = 0; index < hashImages.length; index += 1) {
@@ -37,6 +48,7 @@ const syncIn = (hashImages : string[]) => {
 }
 
 const syncOut = () => {
+  init()
   const blacklist = Storage.get(KEY)
   const hashImages = Object.keys(blacklist)
 

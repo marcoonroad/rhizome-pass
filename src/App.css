@@ -165,3 +165,18 @@ body > * {
 .manager-container p {
   text-align: left !important;
 }
+
+.manager-action-label {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+
+.manager-text-status {
+  color: #4CAF50;
+  font-weight: bold;
+  font-variant: small-caps;
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+}

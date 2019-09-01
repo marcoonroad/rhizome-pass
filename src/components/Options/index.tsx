@@ -93,15 +93,26 @@ const Options : React.FC<IOptions> = ({ values, label, optionsId, customRef, cla
   const labelId = `${optionsId}-label`
   const listId = `${optionsId}-list`
 
-  const [_, update] = React.useState({ changed: false })
+  const [current, update] = React.useState({ clean: false, value: '' })
 
   const clearSelection = (event : any) => {
     event.preventDefault()
 
     if (customRef.current && exists(customRef.current.value)) {
       customRef.current.value = ''
-      update({ changed: true })
+      update({ clean: true, value: '' })
     }
+  }
+
+  const trackChanges = () => {
+    if (customRef.current && exists(customRef.current.value)) {
+      const value = customRef.current.value
+      update({ ...current, value })
+    }
+  }
+
+  const hasValue = () => {
+    return !current.value
   }
 
   // const firstValue = values[0]
@@ -110,10 +121,13 @@ const Options : React.FC<IOptions> = ({ values, label, optionsId, customRef, cla
       <Label htmlFor={labelId}>{label}</Label>
       <div className={'horizontal-stack'}>
         <Div className='horizontal-stack'>
-          <Input list={listId} id={labelId} ref={customRef}/>
+          <Input list={listId} id={labelId} ref={customRef}
+            onChange={trackChanges} value={current.value}/>
           <datalist id={listId}>{values.map(asOption)}</datalist>
         </Div>
         <Button
+          type='button'
+          disabled={hasValue()}
           onClick={clearSelection}>CLEAR</Button>
       </div>
     </div>

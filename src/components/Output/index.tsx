@@ -74,6 +74,7 @@ const Output : React.FC<IOutput> = ({ value, className, label, labelId }) => {
           disabled={disabled}
           value={value} />
         <Button
+          type='button'
           disabled={disabled}
           onClick={copyContent}>COPY</Button>
       </div>

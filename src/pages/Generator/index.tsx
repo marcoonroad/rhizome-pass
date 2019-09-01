@@ -97,6 +97,7 @@ const MainPage : React.FC = () => {
     const initialNonce = current.saltAndData === saltAndData ? current.nonce : undefined
 
     const { newPassword, hashImage, nonce, derivedKey } = await computePairs(data, salt, initialNonce)
+
     update({ ...current, hashImage, password: newPassword, nonce, derivedKey, saltAndData })
   }
   
@@ -125,11 +126,13 @@ const MainPage : React.FC = () => {
         optionsId={optionsId} values={servicesList} label={'External Service'}
         className={'form-component'} /><br/>
       <Button onClick={generatePassword}
+        type='button'
         className={'form-component'}>GENERATE</Button><br/><br/>
       <Output value={current.password}
         labelId={outputId} label={'Output Password'}
         className={'form-component'}/><br/>
       <Button onClick={refreshPassword}
+        type='button'
         disabled={!current.password}
         className={'form-component'}>REFRESH</Button>
     </Form>

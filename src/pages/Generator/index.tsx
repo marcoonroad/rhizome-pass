@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Crypto from '../../crypto'
+import Blacklist from '../../utils/blacklist'
 import Password from '../../components/Password'
 import Options from '../../components/Options'
 import Output from '../../components/Output'
@@ -43,12 +44,43 @@ const MainPage : React.FC = () => {
   const outputId = 'generated-password-id'
   
   const [current, update] = React.useState({
-    password: 'Teste talkey?'
+    password: '',
+    hashImage: '',
+    derivedKey: '',
+    saltAndData: '',
+    nonce: 0,
   })
   
   const masterPasswordRef = React.useRef<HTMLInputElement>(null)
   const serviceRef = React.useRef<HTMLInputElement>(null)
-  
+
+  const computePass = (hashImage : string) => {
+    return Crypto.asBase64(hashImage)
+      .replace(/\//g, '')
+      .substr(0, 12)
+  }
+
+  const computePairs = async (data : string, salt : string, initialNonce = 0) => {
+    const derivedKey = await Crypto.pbkdf2(data, salt)
+    const blacklist = Blacklist.get()
+
+    let nonce = initialNonce
+    console.log('Trying the HMAC nonce: ' + nonce)
+    let hashImage = await Crypto.hmac('SHA-512', nonce.toString(), derivedKey)
+    let hexHashImage = Crypto.asHex(hashImage)
+
+    while (blacklist[ hexHashImage ]) {
+      nonce += 1
+      console.log('Trying the HMAC nonce: ' + nonce)
+      hashImage = await Crypto.hmac('SHA-512', nonce.toString(), derivedKey)
+      hexHashImage = Crypto.asHex(hashImage)
+    }
+
+    const newPassword = computePass(hashImage)
+
+    return { hashImage, newPassword, nonce, derivedKey }
+  }
+
   const generatePassword = async function (event : any) {
     event.preventDefault()
   
@@ -59,16 +91,29 @@ const MainPage : React.FC = () => {
       alert('You must fill both the master password and service fields!')
       return
     }
-  
-    const newPassword = Crypto.asBase64(await Crypto.pbkdf2(data, salt))
-      .replace(/\//g, '')
-      .substr(0, 12)
-  
-    update({ ...current, password: newPassword })
+
+    // no changes from form inputs since last operation?
+    const saltAndData = salt + ',' + data
+    const initialNonce = current.saltAndData === saltAndData ? current.nonce : undefined
+
+    const { newPassword, hashImage, nonce, derivedKey } = await computePairs(data, salt, initialNonce)
+    update({ ...current, hashImage, password: newPassword, nonce, derivedKey, saltAndData })
   }
   
-  const refreshPassword = function (event : any) {
+  const refreshPassword = async function (event : any) {
     event.preventDefault()
+
+    if (current.hashImage && current.derivedKey) {
+      const nonce = current.nonce + 1
+      const hexHashImage = Crypto.asHex(current.hashImage)
+      console.log('Refreshing the new HMAC nonce: ' + nonce)
+      const hashImage = await Crypto.hmac('SHA-512', nonce.toString(), current.derivedKey)
+      const newPassword = computePass(hashImage)
+
+      Blacklist.add(hexHashImage)
+
+      update({ ...current, hashImage, password: newPassword, nonce })
+    }
   }
   
   return (
@@ -84,7 +129,8 @@ const MainPage : React.FC = () => {
       <Output value={current.password}
         labelId={outputId} label={'Output Password'}
         className={'form-component'}/><br/>
-      <Button onClick={refreshPassword} style={{display: 'none'}}
+      <Button onClick={refreshPassword}
+        disabled={!current.password}
         className={'form-component'}>REFRESH</Button>
     </Form>
   )

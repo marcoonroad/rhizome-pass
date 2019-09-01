@@ -72,6 +72,16 @@ button:hover {
   font-weight: bold;
 }
 
+button:hover:disabled {
+  background-color: #4CAF50;
+  font-weight: normal;
+}
+
+*:disabled {
+  -webkit-filter: grayscale(50%) opacity(50%) blur(50%);
+  filter: grayscale(50%) opacity(50%) blur(50%);
+}
+
 .footer-text {
   display: inline-block;
   width: 100%;

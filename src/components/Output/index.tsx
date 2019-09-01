@@ -62,6 +62,8 @@ const Output : React.FC<IOutput> = ({ value, className, label, labelId }) => {
     return navigator.clipboard.writeText(value)
   }
 
+  const disabled = !value
+
   return (
     <div className={`${className}`}>
       <Label htmlFor={labelId}>{label}</Label>
@@ -69,8 +71,10 @@ const Output : React.FC<IOutput> = ({ value, className, label, labelId }) => {
         <StyledOutput
           id={labelId}
           readOnly
+          disabled={disabled}
           value={value} />
         <Button
+          disabled={disabled}
           onClick={copyContent}>COPY</Button>
       </div>
     </div>

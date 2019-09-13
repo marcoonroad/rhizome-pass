@@ -19,7 +19,7 @@ const DefaultInput = styled.input`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 5px 0px 0px 5px;
 `
 
 const Label = DefaultLabel
@@ -58,21 +58,77 @@ font-size: 16px;
 `
 */
 
+const DefaultButton = styled.button`
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+`
+
+const Button = styled(DefaultButton)`
+  border-radius: 0px 5px 5px 0px;
+  width: 25%;
+  display: block;
+`
+
+const Div = styled.div`
+  width: 75%;
+  display: block;
+`
+
 const asKey = (value : string) => value.toLowerCase().replace(/\s/g, '-')
 const asOption = (value : string) =>
   <option value={value} key={asKey(value)}>{value}</option>
 
+const exists = (value : any) => {
+  return value !== null && value !== undefined && value !== '' && value !== 0
+}
+
 const Options : React.FC<IOptions> = ({ values, label, optionsId, customRef, className }) => {
   const labelId = `${optionsId}-label`
   const listId = `${optionsId}-list`
+
+  const [current, update] = React.useState({ clean: false, value: '' })
+
+  const clearSelection = (event : any) => {
+    event.preventDefault()
+
+    if (customRef.current && exists(customRef.current.value)) {
+      customRef.current.value = ''
+      update({ clean: true, value: '' })
+    }
+  }
+
+  const trackChanges = () => {
+    if (customRef.current && exists(customRef.current.value)) {
+      const value = customRef.current.value
+      update({ ...current, value })
+    }
+  }
+
+  const hasValue = () => {
+    return !current.value
+  }
 
   // const firstValue = values[0]
   return (
     <div className={className}>
       <Label htmlFor={labelId}>{label}</Label>
       <div className={'horizontal-stack'}>
-        <Input list={listId} id={labelId} ref={customRef}/>
-        <datalist id={listId}>{values.map(asOption)}</datalist>
+        <Div className='horizontal-stack'>
+          <Input list={listId} id={labelId} ref={customRef}
+            onChange={trackChanges} value={current.value}/>
+          <datalist id={listId}>{values.map(asOption)}</datalist>
+        </Div>
+        <Button
+          type='button'
+          disabled={hasValue()}
+          onClick={clearSelection}>CLEAR</Button>
       </div>
     </div>
   )

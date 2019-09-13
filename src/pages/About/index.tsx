@@ -3,7 +3,7 @@ import React from 'react'
 // TODO: abstract the whole animation as a separated component
 
 const lines = [
-  'Fountain Pass is an offline password manager/generator',
+  'Fountain Pass is an offline password manager / generator',
   'developed by @marcoonroad (Marco Aurélio da Silva). This',
   'password generator uses cryptographic primitives such as',
   'HMAC, hashes, KDF and PRNG. We don\'t store anything except',

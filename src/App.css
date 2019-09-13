@@ -67,9 +67,26 @@ button.form-component {
   display: flex !important;
 }
 
+button:focus, input:focus {
+  outline: none;
+}
+
 button:hover {
   background-color: #4CAF50;
-  font-weight: bold;
+  font-weight: normal;
+}
+
+button:hover:disabled {
+  background-color: #4CAF50;
+  font-weight: normal;
+}
+
+button:disabled {
+  background-color: gray !important;
+  /*
+  -webkit-filter: grayscale(0.2) opacity(0.8) !important;
+  filter: grayscale(0.2) opacity(0.8) !important;
+  */
 }
 
 .footer-text {
@@ -123,6 +140,8 @@ button:hover {
 .about-container p {
   padding: 0.75em 0.75em;
   display: block;
+  transition: 0.5s;
+  text-align: justify;
 }
 
 .text-link {
@@ -135,8 +154,29 @@ button:hover {
 
 body * {
   font-family: 'Inconsolata', monospace !important;
+  font-variant: small-caps !important;
 }
 
 body > * {
   font-family: 'Inconsolata', monospace !important;
+  font-variant: small-caps !important;
+}
+
+.manager-container p {
+  text-align: left !important;
+}
+
+.manager-action-label {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+}
+
+.manager-text-status {
+  color: #4CAF50;
+  font-weight: bold;
+  font-variant: small-caps;
+  display: inline-block;
+  text-align: right;
+  width: 50%;
 }

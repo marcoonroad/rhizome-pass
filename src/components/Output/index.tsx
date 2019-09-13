@@ -55,28 +55,14 @@ interface IOutput {
   labelId : string
 }
 
-const Output : React.SFC<IOutput> = ({ value, className, label, labelId }) => {
-  const passwordOutput = React.useRef<HTMLInputElement>(null);
-
+const Output : React.FC<IOutput> = ({ value, className, label, labelId }) => {
   const copyContent = (event : any) => {
     event.preventDefault()
-    const selection = document.getSelection()
 
-    if (selection !== null) {
-      const selected = selection.rangeCount > 0 ? selection.getRangeAt(0) : false
-
-      if (passwordOutput.current !== null) {
-        passwordOutput.current.select()
-
-        document.execCommand('copy') // may fail/throw
-
-        selection.removeAllRanges();
-        if (selected !== false) {
-          selection.addRange(selected);
-        }
-      }
-    }
+    return navigator.clipboard.writeText(value)
   }
+
+  const disabled = !value
 
   return (
     <div className={`${className}`}>
@@ -84,10 +70,12 @@ const Output : React.SFC<IOutput> = ({ value, className, label, labelId }) => {
       <div className={'horizontal-stack'}>
         <StyledOutput
           id={labelId}
-          ref={passwordOutput}
           readOnly
+          disabled={disabled}
           value={value} />
         <Button
+          type='button'
+          disabled={disabled}
           onClick={copyContent}>COPY</Button>
       </div>
     </div>

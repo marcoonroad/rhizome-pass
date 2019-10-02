@@ -11,6 +11,9 @@
 # production
 /build
 
+# vim files
+*.swp
+
 # misc
 .DS_Store
 .env.local

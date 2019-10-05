@@ -1,4 +1,24 @@
 import React from 'react'
+import styled from 'styled-components'
+import install from '../../utils/install'
+
+const DefaultButton = styled.button`
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+`
+
+const Button = styled(DefaultButton)`
+  margin: 5px;
+  margin-left: 0px;
+  margin-right: 5px;
+`
 
 // TODO: abstract the whole animation as a separated component
 
@@ -50,8 +70,10 @@ const AboutPage : React.FC = () => {
         {animatedText}<br/><br/>
 
         <a href='https://github.com/marcoonroad/fountain' className='text-link'
-          title='Fountain Pass repository'>github.com/marcoonroad/fountain</a>
+          title='Fountain Pass repository'>https://github.com/marcoonroad/fountain</a><br/>
       </p>
+
+      <Button onClick={install} className={'form-component'}>INSTALL</Button>
     </div>
   )
 }

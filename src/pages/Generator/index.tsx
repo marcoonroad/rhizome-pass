@@ -119,22 +119,29 @@ const MainPage : React.FC = () => {
   
   return (
     <Form className={'form-container'}>
-      <Password customRef={masterPasswordRef}
-        labelId={passwordId} visible={false} value={''} label={'Master Password'}
-        className={'form-component'} /><br/>
-      <Options customRef={serviceRef}
-        optionsId={optionsId} values={servicesList} label={'External Service'}
-        className={'form-component'} /><br/>
-      <Button onClick={generatePassword}
-        type='button'
-        className={'form-component'}>GENERATE</Button><br/><br/>
-      <Output value={current.password}
-        labelId={outputId} label={'Output Password'}
-        className={'form-component'}/><br/>
-      <Button onClick={refreshPassword}
-        type='button'
-        disabled={!current.password}
-        className={'form-component'}>REFRESH</Button>
+      <div>
+        <Password customRef={masterPasswordRef}
+          labelId={passwordId} visible={false} value={''} label={'Master Password'}
+          className={'form-component'} /><br/>
+        <Options customRef={serviceRef}
+          optionsId={optionsId} values={servicesList} label={'External Service'}
+          className={'form-component'} /><br/>
+        <Button onClick={generatePassword}
+          type='button'
+          className={'form-component'}>GENERATE</Button><br/><br/>
+      </div>
+
+      <hr/>
+
+      <div>
+        <Output value={current.password}
+          labelId={outputId} label={'Output Password'}
+          className={'form-component'}/><br/>
+        <Button onClick={refreshPassword}
+          type='button'
+          disabled={!current.password}
+          className={'form-component'}>REFRESH</Button>
+      </div>
     </Form>
   )
 }

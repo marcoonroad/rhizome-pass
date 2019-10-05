@@ -14,13 +14,15 @@ const install = async () => {
 
     deferredPrompt.userChoice.then((choiceResult : any) => {
       if (choiceResult.outcome === 'accepted') {
-        console.log('Your PWA has been installed');
+        console.log('Your PWA has been installed!')
       } else {
-        console.log('User chose to not install your PWA');
+        console.log('User chose to not install your PWA...')
       }
 
       deferredPrompt = null;
     });
+  } else {
+    console.warn('Could not catch before install prompt event!')
   }
 }
 

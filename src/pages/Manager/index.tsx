@@ -90,6 +90,8 @@ const ManagerComponent : React.FC = () => {
           className={'form-component'}>IMPORT</Button>
       </p>
 
+      <hr/>
+
       <p>
         <span>{aboutExport}</span><br/><br/>
 

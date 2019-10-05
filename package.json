@@ -23,7 +23,7 @@
     "predeploy:prod": "yarn run build",
     "deploy:prod": "gh-pages -b gh-pages -d ./build",
     "android:off": "adb reverse --remove-all",
-    "android:on": "adb reverse --remove-all && adb reverse tcp:4000 tcp:3000",
+    "android:on": "yarn run android:off && adb reverse tcp:4000 tcp:3000",
     "predebug": "yarn run android:on && echo 'Device is listening at http://localhost:4000 address...'",
     "debug": "yarn run start",
     "start": "react-scripts start",

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import install from '../../utils/install'
+import Install from '../../utils/install'
+
+const { install } = Install
 
 const DefaultButton = styled.button`
   background-color: #4CAF50;
@@ -37,9 +39,23 @@ const AboutPage : React.FC = () => {
   const [current, update] = React.useState({
     counter: 0,
     blink: true,
+    installable: false,
+    installed: false,
   })
 
   React.useEffect(() => {
+    Install.before().then(() => {
+      update(state => {
+        return { ...state, installable: true }
+      })
+    })
+
+    Install.after().then(() => {
+      update(state => {
+        return { ...state, installed: true }
+      })
+    })
+
     if (current.counter === fullText.length) {
       const timeout = setTimeout(() => {
         update(current => {
@@ -59,7 +75,7 @@ const AboutPage : React.FC = () => {
     }, 70)
 
     return () => clearTimeout(timeout)
-  }, [current.counter, current.blink])
+  }, [current.counter, current.blink, current.installed, current.installable])
 
   const suffix = current.blink ? '_' : ''
   const animatedText = fullText.substr(0, current.counter) + suffix
@@ -73,7 +89,8 @@ const AboutPage : React.FC = () => {
           title='Fountain Pass repository'>https://github.com/marcoonroad/fountain</a><br/>
       </p>
 
-      <Button onClick={install} className={'form-component'}>INSTALL</Button>
+      <Button onClick={install} className={'form-component'}
+        disabled={current.installed || !current.installable}>INSTALL</Button>
     </div>
   )
 }

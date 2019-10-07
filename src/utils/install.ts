@@ -1,11 +1,9 @@
-let deferredPrompt : any = null;
+import promise from './promise'
 
-window.addEventListener('beforeinstallprompt', (event : any) => {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-  event.preventDefault();
-  // Stash the event so it can be triggered later.
-  deferredPrompt = event;
-});
+const beforeInstall = promise.defer<any>()
+const afterInstall = promise.defer<any>()
+
+let deferredPrompt : any = null;
 
 const install = async () => {
   if (deferredPrompt) {
@@ -26,5 +24,22 @@ const install = async () => {
   }
 }
 
-export default install
+window.addEventListener('beforeinstallprompt', (event : any) => {
+  event.preventDefault()
+  deferredPrompt = event
 
+  beforeInstall.resolve(event)
+})
+
+window.addEventListener('appinstalled', () => {
+  afterInstall.resolve(true)
+})
+
+afterInstall.promise.then(() => {
+  localStorage.setItem('appinstalled', 'true')
+})
+
+const after = () => afterInstall.promise
+const before = () => beforeInstall.promise
+
+export default { install, after, before }

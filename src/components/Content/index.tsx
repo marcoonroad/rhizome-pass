@@ -40,34 +40,43 @@ const Li = styled.li`
   text-align: center;
 `
 
-const HeaderNav : React.FC = function () {
+interface IHeaderNav {
+  clickGenerator: () => void,
+  clickManager: () => void,
+  clickAbout: () => void
+}
+
+const HeaderNav : React.FC<IHeaderNav> = function ({
+  clickGenerator, clickManager, clickAbout
+}) {
   return (
     <NavDiv>
       <Ul>
         <Li className='tab-wrapper'>
           <NavLink to='/generator' className='tab-selector' activeClassName='tab-selector-active'
-            title='Generator'>Generator</NavLink>
+            title='Generator' onClick={clickGenerator}>Generator</NavLink>
         </Li>
         <Li className='tab-wrapper'>
           <NavLink to='/manager' className='tab-selector' activeClassName='tab-selector-active'
-            title='Manager'>Manager</NavLink>
+            title='Manager' onClick={clickManager}>Manager</NavLink>
         </Li>
         <Li className='tab-wrapper'>
           <NavLink to='/about' className='tab-selector' activeClassName='tab-selector-active'
-            title='About'>About</NavLink>
+            title='About' onClick={clickAbout}>About</NavLink>
         </Li>
       </Ul>
     </NavDiv>
   )
 }
 
-const FooterComponent : React.FC = () => {
+interface IFooter {
+  visible: boolean
+}
+
+const FooterComponent : React.FC<IFooter> = ({ visible }) => {
   // const selfRef = React.useRef<HTMLInputElement>(null)
 
   // /*
-  const [current, update] = React.useState({
-    visible: true,
-  })
   // */
 
   /*
@@ -76,36 +85,36 @@ const FooterComponent : React.FC = () => {
   })
   */
 
-  const hideFooter = (event : any) => {
-    if (
-      (event.target.type === 'text' ||
-      event.target.type === 'password' ||
-      (event.target.list !== null &&
-      event.target.list !== undefined)) // &&
+  // const hideFooter = (event : any) => {
+  //  if (
+  //    (event.target.type === 'text' ||
+  //    event.target.type === 'password' ||
+  //    (event.target.list !== null &&
+  //    event.target.list !== undefined)) // &&
       // selfRef.current !== null
-    ) {
+  //  ) {
       // /*
-      update(() => {
-        return { visible: false }
-      })
+  //    update(() => {
+  //      return { visible: false }
+  //    })
       // */
       // selfRef.current.style.display = 'none';
-    }
+  //  }
     // event.target.removeEventListener('focusin')
-  }
-
-  const showFooter = (event : any) => {
-    if (
-      (event.target.type === 'text' ||
-      event.target.type === 'password' ||
-      (event.target.list !== null &&
-      event.target.list !== undefined)) // &&
+  // }
+  //
+  // const showFooter = (event : any) => {
+  //  if (
+  //    (event.target.type === 'text' ||
+  //    event.target.type === 'password' ||
+  //    (event.target.list !== null &&
+  //    event.target.list !== undefined)) // &&
       // selfRef.current !== null
-    ) {
+  //  ) {
       // /*
-      update(() => {
-        return { visible: true }
-      })
+  //    update(() => {
+  //      return { visible: true }
+  //    })
       // */
      // selfRef.current.style.display = 'block'
      /*
@@ -113,19 +122,19 @@ const FooterComponent : React.FC = () => {
        return { timestamp: (new Date()).getTime() }
      }) // forces component reload
      */
-    }
+  //  }
     // event.target.removeEventListener('focusout')
-  }
+  // }
 
-  React.useEffect(() => {
-    document.addEventListener('focusin', hideFooter)
-    document.addEventListener('focusout', showFooter)
-
-    return () => {
-      document.removeEventListener('focusin', hideFooter)
-      document.removeEventListener('focusout', showFooter)
-    }
-  }, [/*current.timestamp*/current.visible])
+  // React.useEffect(() => {
+  //  document.addEventListener('focusin', hideFooter)
+  //  document.addEventListener('focusout', showFooter)
+  //
+  //  return () => {
+  //    document.removeEventListener('focusin', hideFooter)
+  //    document.removeEventListener('focusout', showFooter)
+  //  }
+  // }, [/*current.timestamp*/current.visible])
 
   /*
   if (!current.visible) {
@@ -136,7 +145,7 @@ const FooterComponent : React.FC = () => {
   */
 
   return (
-    <Footer className={current.visible ? '' : 'invisible'}>
+    <Footer className={visible ? '' : 'invisible'}>
       <FooterContent>
         <span className={'footer-text'}>@marcoonroad - 2019 copyleft</span>
       </FooterContent>
@@ -145,13 +154,28 @@ const FooterComponent : React.FC = () => {
 }
 
 const Content : React.FC = () => {
+  const [current, update] = React.useState({
+    visible: false,
+  })
+
+  const showFooter = () => {
+    update(() => { return { visible: true } })
+  }
+
+  const hideFooter = () => {
+    update(() => { return { visible: false } })
+  }
+
   return (
     <div id={'content'}>
       <Header title={'Fountain'} subtitle={'Offline Password Manager'}/>
 
       <Router>
         <div>
-          <HeaderNav/>
+          <HeaderNav
+            clickGenerator={hideFooter}
+            clickManager={showFooter}
+            clickAbout={showFooter}/>
 
           <Switch>
             <Route path="/generator" component={GeneratorContent} />
@@ -162,7 +186,7 @@ const Content : React.FC = () => {
         </div>
       </Router>
 
-      <FooterComponent/>
+      <FooterComponent visible={current.visible}/>
     </div>
   )
 }

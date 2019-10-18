@@ -80,8 +80,19 @@ const Password : React.FC<IPassword> = (initialPassword) => {
     setPassword({ ...currentPassword, value: event.target.value })
   }
 
+  const hideImage = (<img
+    className='eye-icon'
+    alt='Hide Password'
+    title='Hide Password'
+    src='eye-hidden.png'/>)
+  const showImage = (<img
+    className='eye-icon'
+    alt='Show Password'
+    title='Show Password'
+    src='eye-shown.png'/>)
+
   const id = initialPassword.labelId
-  const buttonText = currentPassword.visible ? 'HIDE' : 'SHOW'
+  const buttonText = currentPassword.visible ? hideImage : showImage
   const inputType = currentPassword.visible ? 'text' : 'password'
   const placeholder = currentPassword.visible ? 'password' : '********'
 

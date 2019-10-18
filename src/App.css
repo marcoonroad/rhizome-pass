@@ -121,6 +121,7 @@ button:disabled {
   width: auto;
   padding: 1em 1em;
   background-color: #282c34;
+  pointer-events: none;
 }
 
 .tab-wrapper {
@@ -179,4 +180,43 @@ body > * {
   display: inline-block;
   text-align: right;
   width: 50%;
+}
+
+.eye-icon {
+  width: 24px;
+  height: 14px;
+}
+
+.stop-component {
+  margin-top: 15px;
+}
+
+.stop-icon {
+  width: 60%;
+  margin: 0 auto;
+  display: block;
+}
+
+.stop-text {
+  color: white;
+  margin: 0 auto;
+  display: block;
+  width: 80%;
+  font-size: 3em;
+  text-align: center;
+}
+
+.stop-subtitle {
+  padding-top: 25px;
+  color: white;
+  margin: 0 auto;
+  width: 80%;
+  display: block;
+  font-size: 1.1em;
+  text-align: justify;
+  padding-bottom: 50px;
+}
+
+.disabled-link {
+  pointer-events: none;
 }

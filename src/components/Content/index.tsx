@@ -41,27 +41,33 @@ const Li = styled.li`
 `
 
 interface IHeaderNav {
+  disabled: boolean,
   clickGenerator: () => void,
   clickManager: () => void,
   clickAbout: () => void
 }
 
 const HeaderNav : React.FC<IHeaderNav> = function ({
-  clickGenerator, clickManager, clickAbout
+  disabled, clickGenerator, clickManager, clickAbout
 }) {
+  const disabledClass = disabled ? 'disabled-link' : ''
+
   return (
     <NavDiv>
       <Ul>
         <Li className='tab-wrapper'>
-          <NavLink to='/generator' className='tab-selector' activeClassName='tab-selector-active'
+          <NavLink to='/generator' className={`tab-selector ${disabledClass}`}
+            activeClassName='tab-selector-active'
             title='Generator' onClick={clickGenerator}>Generator</NavLink>
         </Li>
         <Li className='tab-wrapper'>
-          <NavLink to='/manager' className='tab-selector' activeClassName='tab-selector-active'
+          <NavLink to='/manager' className={`tab-selector ${disabledClass}`}
+            activeClassName='tab-selector-active'
             title='Manager' onClick={clickManager}>Manager</NavLink>
         </Li>
         <Li className='tab-wrapper'>
-          <NavLink to='/about' className='tab-selector' activeClassName='tab-selector-active'
+          <NavLink to='/about' className={`tab-selector ${disabledClass}`}
+            activeClassName='tab-selector-active'
             title='About' onClick={clickAbout}>About</NavLink>
         </Li>
       </Ul>
@@ -153,40 +159,75 @@ const FooterComponent : React.FC<IFooter> = ({ visible }) => {
   )
 }
 
+const StopComponent : React.FC = () => {
+  const title = 'STOP NOW!'
+  const subtitle = ([
+    'Please, turn off your internet connection to use this app.',
+    'This is just for security purposes, and \'cause this app',
+    'will consume your sensible informations, although in a cryptographic',
+    'secure way.'
+  ]).join(' ')
+
+  return (
+    <div className='stop-component'>
+      <img className='stop-icon' src='stop.png' alt='Stop Now!' title='Stop Now!'/>
+      <h3 className='stop-text'>{title}</h3>
+      <span className='stop-subtitle'>{subtitle}</span>
+    </div>
+  )
+}
+
 const Content : React.FC = () => {
   const [current, update] = React.useState({
     visible: false,
+    online: navigator.onLine,
   })
 
   const showFooter = () => {
-    update(() => { return { visible: true } })
+    update(state => { return { ...state, visible: true } })
   }
 
   const hideFooter = () => {
-    update(() => { return { visible: false } })
+    update(state => { return { ...state, visible: false } })
   }
+
+  const whenOffline = () => {
+    update(state => { return { ...state, online: false } })
+  }
+
+  const whenOnline = () => {
+    update(state => { return { ...state, online: true } })
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('offline', whenOffline)
+    window.addEventListener('online', whenOnline)
+  }, [current.online])
 
   return (
     <div id={'content'}>
-      <Header title={'Fountain'} subtitle={'Offline Password Manager'}/>
+      <Header title={'Fountain Pass'} subtitle={'Offline Password Manager'}/>
 
       <Router>
         <div>
           <HeaderNav
+            disabled={current.online}
             clickGenerator={hideFooter}
             clickManager={showFooter}
-            clickAbout={showFooter}/>
-
-          <Switch>
+            clickAbout={showFooter}/>{
+          current.online ? (
+            <StopComponent/>
+          ) :
+          (<Switch>
             <Route path="/generator" component={GeneratorContent} />
             <Route path="/manager" component={ManagerComponent} />
             <Route path="/about" component={AboutContent} />
             <Route render={() => <Redirect to='/generator' />} />
-          </Switch>
-        </div>
+          </Switch>)
+        }</div>
       </Router>
 
-      <FooterComponent visible={current.visible}/>
+      <FooterComponent visible={current.visible && !current.online}/>
     </div>
   )
 }

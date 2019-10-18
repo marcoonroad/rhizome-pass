@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import eyeHiddenIcon from '../../assets/images/eye-hidden.png'
+import eyeShownIcon from '../../assets/images/eye-shown.png'
+
 const DefaultButton = styled.button`
   background-color: #4CAF50;
   border: none;
@@ -84,12 +87,12 @@ const Password : React.FC<IPassword> = (initialPassword) => {
     className='eye-icon'
     alt='Hide Password'
     title='Hide Password'
-    src='eye-hidden.png'/>)
+    src={eyeHiddenIcon}/>)
   const showImage = (<img
     className='eye-icon'
     alt='Show Password'
     title='Show Password'
-    src='eye-shown.png'/>)
+    src={eyeShownIcon}/>)
 
   const id = initialPassword.labelId
   const buttonText = currentPassword.visible ? hideImage : showImage

@@ -8,6 +8,8 @@ import AboutContent from '../../pages/About'
 import ManagerComponent from '../../pages/Manager'
 import GeneratorContent from '../../pages/Generator'
 
+import stopIcon from '../../assets/images/stop.png'
+
 const Footer = styled.div`
   flex-grow: 0;
   display: flex;
@@ -170,7 +172,7 @@ const StopComponent : React.FC = () => {
 
   return (
     <div className='stop-component'>
-      <img className='stop-icon' src='stop.png' alt='Stop Now!' title='Stop Now!'/>
+      <img className='stop-icon' src={stopIcon} alt='Stop Now!' title='Stop Now!'/>
       <h3 className='stop-text'>{title}</h3>
       <span className='stop-subtitle'>{subtitle}</span>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Install from '../../utils/install'
+import share from '../../utils/share'
 
 const { install } = Install
 
@@ -21,6 +22,10 @@ const Button = styled(DefaultButton)`
   margin-left: 0px;
   margin-right: 5px;
 `
+
+const SHARE_TITLE = 'Give a try for this password manager!'
+const SHARE_TEXT = 'Fountain Pass is a Secure Offline Password Generator/Manager.'
+const SHARE_URL = 'https://fountain-pass.surge.sh'
 
 // TODO: abstract the whole animation as a separated component
 
@@ -80,6 +85,12 @@ const AboutPage : React.FC = () => {
   const suffix = current.blink ? '_' : ''
   const animatedText = fullText.substr(0, current.counter) + suffix
 
+  const shareApp = (event : any) => {
+    event.preventDefault()
+
+    return share(SHARE_TITLE, SHARE_TEXT, SHARE_URL).catch(console.error)
+  }
+
   return (
     <div className='about-container'>
       <p>
@@ -91,6 +102,9 @@ const AboutPage : React.FC = () => {
 
       <Button onClick={install} className={'form-component'}
         disabled={current.installed || !current.installable}>INSTALL</Button>
+
+      <Button onClick={shareApp} className={'form-component'}>SHARE</Button>
+
     </div>
   )
 }

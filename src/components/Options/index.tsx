@@ -39,25 +39,6 @@ interface IOptions {
   customRef : React.RefObject<HTMLInputElement>
 }
 
-/*
-const Select = styled.select`
-background-color: #4CAF50;
-border: none;
-color: white;
-padding: 12px 24px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-`
-
-const Option = styled.option`
-padding: 12px 24px;
-text-align: center;
-font-size: 16px;
-`
-*/
-
 const DefaultButton = styled.button`
   background-color: #4CAF50;
   border: none;
@@ -115,7 +96,6 @@ const Options : React.FC<IOptions> = ({ values, label, optionsId, customRef, cla
     return !current.value
   }
 
-  // const firstValue = values[0]
   return (
     <div className={className}>
       <Label htmlFor={labelId}>{label}</Label>

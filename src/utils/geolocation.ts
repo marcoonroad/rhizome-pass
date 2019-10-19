@@ -1,3 +1,5 @@
+// TODO: should I use it to grab more entropy for user? I think NO...
+
 const get = () => {
   if ('geolocation' in navigator) {
     return new Promise((resolve, reject) => {
@@ -12,4 +14,3 @@ const get = () => {
 }
 
 export default { get }
-

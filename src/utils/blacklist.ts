@@ -16,7 +16,7 @@ init()
 
 /*
 const validate = (hashImage : string) => {
-
+  // TODO: implement validation for import
 }
 */
 

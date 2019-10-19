@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { BrowserRouter as Router, Route, NavLink, Switch, Redirect } from 'react-router-dom'
 
 import Header from '../Header'
+import OfflineMode from '../../functors/OfflineMode'
 
-import AboutContent from '../../pages/About'
-import ManagerComponent from '../../pages/Manager'
-import GeneratorContent from '../../pages/Generator'
+import AboutComponent from '../../pages/About'
+import ManagerOfflineComponent from '../../pages/Manager'
+import GeneratorOfflineComponent from '../../pages/Generator'
 
 import stopIcon from '../../assets/images/stop.png'
 
@@ -109,6 +110,14 @@ const StopComponent : React.FC = () => {
   )
 }
 
+const ManagerComponent : React.FC = () => {
+  return (<OfflineMode onlineComponent={StopComponent} offlineComponent={ManagerOfflineComponent} />)
+}
+
+const GeneratorComponent : React.FC = () => {
+  return (<OfflineMode onlineComponent={StopComponent} offlineComponent={GeneratorOfflineComponent}/>)
+}
+
 const Content : React.FC = () => {
   const [current, update] = React.useState({
     visible: false,
@@ -143,20 +152,16 @@ const Content : React.FC = () => {
       <Router>
         <div>
           <HeaderNav
-            disabled={current.online}
+            disabled={false}
             clickGenerator={hideFooter}
             clickManager={showFooter}
-            clickAbout={showFooter}/>{
-          current.online ? (
-            <StopComponent/>
-          ) :
-          (<Switch>
-            <Route path="/generator" component={GeneratorContent} />
+            clickAbout={showFooter}/><Switch>
+            <Route path="/generator" component={GeneratorComponent} />
             <Route path="/manager" component={ManagerComponent} />
-            <Route path="/about" component={AboutContent} />
+            <Route path="/about" component={AboutComponent} />
             <Route render={() => <Redirect to='/generator' />} />
-          </Switch>)
-        }</div>
+          </Switch>
+        </div>
       </Router>
 
       <FooterComponent visible={current.visible && !current.online}/>

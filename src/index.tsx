@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import './static/styles/reset.css';
+import './static/styles/debug.css';
+import './static/styles/debug-ie7.css';
 import './index.css';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // eslint-disable-next-line
-import _ from './utils/install' // grabs before install PWA prompt event
+import _ from './utils/install'; // grabs before install PWA prompt event
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

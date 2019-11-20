@@ -6,6 +6,7 @@ import {
   NavLink,
   Switch,
   Redirect,
+  useLocation,
 } from 'react-router-dom';
 
 import Header from '../Header';
@@ -103,12 +104,26 @@ const HeaderNav: React.FC<IHeaderNav> = function({
 };
 
 interface IFooter {
-  visible: boolean;
+  online: boolean;
 }
 
-const FooterComponent: React.FC<IFooter> = ({visible}) => {
+declare const gtag: any;
+
+const FooterComponent: React.FC<IFooter> = ({online}) => {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    gtag('config', 'UA-41209773-3', {
+      page_path: location.pathname,
+    });
+  }, [location, online]);
+
+  if (location.pathname === '/generator') {
+    return null;
+  }
+
   return (
-    <Footer className={visible ? '' : 'invisible'}>
+    <Footer className={!online ? '' : 'invisible'}>
       <FooterContent>
         <span className={'footer-text'}>@marcoonroad - 2019 copyleft</span>
       </FooterContent>
@@ -194,9 +209,9 @@ const Content: React.FC = () => {
 
   return (
     <div id={'content'}>
-      <Header title={'Fountain Pass'} subtitle={'Offline Password Manager'} />
-
       <Router>
+        <Header title={'Fountain Pass'} subtitle={'Offline Password Manager'} />
+
         <div>
           <HeaderNav
             disabled={false}
@@ -211,9 +226,9 @@ const Content: React.FC = () => {
             <Route render={() => <Redirect to="/generator" />} />
           </Switch>
         </div>
-      </Router>
 
-      <FooterComponent visible={current.visible && !current.online} />
+        <FooterComponent online={current.online} />
+      </Router>
     </div>
   );
 };

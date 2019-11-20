@@ -63,6 +63,9 @@ const AboutPage: React.FC = () => {
     });
 
     if (current.counter === fullText.length) {
+      return;
+
+      /*
       const timeout = setTimeout(() => {
         update(current => {
           const blink = !current.blink;
@@ -71,6 +74,7 @@ const AboutPage: React.FC = () => {
       }, 400);
 
       return () => clearTimeout(timeout);
+      */
     }
 
     const timeout = setTimeout(() => {
@@ -83,8 +87,11 @@ const AboutPage: React.FC = () => {
     return () => clearTimeout(timeout);
   }, [current.counter, current.blink, current.installed, current.installable]);
 
-  const suffix = current.blink ? '_' : '';
-  const animatedText = fullText.substr(0, current.counter) + suffix;
+  // const suffix = current.blink ? '_' : '';
+  const suffix = '_';
+  const animatedText = fullText.substr(0, current.counter); // + suffix;
+  const difference = fullText.length - current.counter;
+  const invisibleText = difference ? fullText.substr(0 - difference) : '~';
 
   const shareApp = (event: any) => {
     event.preventDefault();
@@ -96,6 +103,15 @@ const AboutPage: React.FC = () => {
     <div className="about-container">
       <p>
         {animatedText}
+        <span
+          className={
+            current.counter === fullText.length
+              ? 'about-blink-animation-start'
+              : 'about-blink-animation-wait'
+          }>
+          {suffix}
+        </span>
+        <span className="about-invisible-text-hack">{invisibleText}</span>
         <br />
         <br />
 

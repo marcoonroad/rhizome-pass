@@ -150,6 +150,67 @@ button:disabled {
   text-align: justify;
 }
 
+.about-invisible-text-hack {
+  color: transparent;
+}
+
+.about-blink-animation-wait {
+  color: rgba(255, 255, 255, 255);
+}
+
+.about-blink-animation-start {
+  color: rgba(255, 255, 255, 255);
+  -webkit-animation-name: about-blink-animation-frames; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 0.4s; /* Safari 4.0 - 8.0 */
+  animation-name: about-blink-animation-frames;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes about-blink-animation-frames {
+  0% {
+    color: rgba(255, 255, 255, 255);
+  }
+  20% {
+    color: rgba(255, 255, 255, 255);
+  }
+  40% {
+    color: rgba(255, 255, 255, 255);
+  }
+  60% {
+    color: rgba(255, 255, 255, 0);
+  }
+  80% {
+    color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    color: rgba(255, 255, 255, 0);
+  }
+}
+
+/* Standard syntax */
+@keyframes about-blink-animation-frames {
+  0% {
+    color: rgba(255, 255, 255, 255);
+  }
+  20% {
+    color: rgba(255, 255, 255, 255);
+  }
+  40% {
+    color: rgba(255, 255, 255, 255);
+  }
+  60% {
+    color: rgba(255, 255, 255, 0);
+  }
+  80% {
+    color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    color: rgba(255, 255, 255, 0);
+  }
+}
+
 .text-link {
   color: white;
 }

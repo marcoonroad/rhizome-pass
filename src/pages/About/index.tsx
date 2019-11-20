@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import Install from '../../utils/install'
-import share from '../../utils/share'
+import React from 'react';
+import styled from 'styled-components';
+import Install from '../../utils/install';
+import share from '../../utils/share';
 
-const { install } = Install
+const {install} = Install;
 
 const DefaultButton = styled.button`
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 12px 24px;
@@ -15,17 +15,18 @@ const DefaultButton = styled.button`
   display: inline-block;
   font-size: 16px;
   border-radius: 5px;
-`
+`;
 
 const Button = styled(DefaultButton)`
   margin: 5px;
   margin-left: 0px;
   margin-right: 5px;
-`
+`;
 
-const SHARE_TITLE = 'Give a try for this password manager!'
-const SHARE_TEXT = 'Fountain Pass is a Secure Offline Password Generator/Manager.'
-const SHARE_URL = 'https://fountain-pass.surge.sh'
+const SHARE_TITLE = 'Give a try for this password manager!';
+const SHARE_TEXT =
+  'Fountain Pass is a Secure Offline Password Generator/Manager.';
+const SHARE_URL = 'https://fountain-pass.surge.sh';
 
 // TODO: abstract the whole animation as a separated component
 
@@ -33,80 +34,95 @@ const lines = [
   'Fountain Pass is an offline password manager / generator',
   'developed by @marcoonroad (Marco Aurélio da Silva). This',
   'password generator uses cryptographic primitives such as',
-  'HMAC, hashes, KDF and PRNG. We don\'t store anything except',
+  "HMAC, hashes, KDF and PRNG. We don't store anything except",
   'for hash images of refreshed generated passwords. This',
-  'project is hosted at: '
-]
+  'project is hosted at: ',
+];
 
-const fullText = lines.join(' ')
+const fullText = lines.join(' ');
 
-const AboutPage : React.FC = () => {
+const AboutPage: React.FC = () => {
   const [current, update] = React.useState({
     counter: 0,
     blink: true,
     installable: false,
     installed: false,
-  })
+  });
 
   React.useEffect(() => {
     Install.before().then(() => {
       update(state => {
-        return { ...state, installable: true }
-      })
-    })
+        return {...state, installable: true};
+      });
+    });
 
     Install.after().then(() => {
       update(state => {
-        return { ...state, installed: true }
-      })
-    })
+        return {...state, installed: true};
+      });
+    });
 
     if (current.counter === fullText.length) {
       const timeout = setTimeout(() => {
         update(current => {
-          const blink = !current.blink
-          return { ...current, blink }
-        })
-      }, 400)
-  
-      return () => clearTimeout(timeout)
+          const blink = !current.blink;
+          return {...current, blink};
+        });
+      }, 400);
+
+      return () => clearTimeout(timeout);
     }
 
     const timeout = setTimeout(() => {
       update(current => {
-        const counter = Math.min(current.counter + 1, fullText.length)
-        return { ...current, counter }
-      })
-    }, 70)
+        const counter = Math.min(current.counter + 1, fullText.length);
+        return {...current, counter};
+      });
+    }, 70);
 
-    return () => clearTimeout(timeout)
-  }, [current.counter, current.blink, current.installed, current.installable])
+    return () => clearTimeout(timeout);
+  }, [current.counter, current.blink, current.installed, current.installable]);
 
-  const suffix = current.blink ? '_' : ''
-  const animatedText = fullText.substr(0, current.counter) + suffix
+  const suffix = current.blink ? '_' : '';
+  const animatedText = fullText.substr(0, current.counter) + suffix;
 
-  const shareApp = (event : any) => {
-    event.preventDefault()
+  const shareApp = (event: any) => {
+    event.preventDefault();
 
-    return share(SHARE_TITLE, SHARE_TEXT, SHARE_URL).catch(console.error)
-  }
+    return share(SHARE_TITLE, SHARE_TEXT, SHARE_URL).catch(console.error);
+  };
 
   return (
-    <div className='about-container'>
+    <div className="about-container">
       <p>
-        {animatedText}<br/><br/>
+        {animatedText}
+        <br />
+        <br />
 
-        <a href='https://github.com/marcoonroad/fountain' className='text-link'
-          title='Fountain Pass repository'>https://github.com/marcoonroad/fountain</a><br/>
+        <span>
+          <i className="material-icons">link</i>{' '}
+          <a
+            href="https://github.com/marcoonroad/fountain"
+            className="text-link"
+            title="Fountain Pass repository">
+            https://github.com/marcoonroad/fountain
+          </a>
+        </span>
+        <br />
       </p>
 
-      <Button onClick={install} className={'form-component'}
-        disabled={current.installed || !current.installable}>INSTALL</Button>
+      <Button
+        onClick={install}
+        className={'form-component'}
+        disabled={current.installed || !current.installable}>
+        INSTALL <i className="material-icons">get_app</i>
+      </Button>
 
-      <Button onClick={shareApp} className={'form-component'}>SHARE</Button>
-
+      <Button onClick={shareApp} className={'form-component'}>
+        SHARE <i className="material-icons">share</i>
+      </Button>
     </div>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;

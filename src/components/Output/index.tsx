@@ -1,29 +1,29 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const DefaultButton = styled.button`
-background-color: #4CAF50;
-border: none;
-color: white;
-padding: 12px 24px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-border-radius: 5px;
-`
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+`;
 
 const DefaultOutput = styled.input`
-background-color: white;
-border: none;
-color: #4CAF50;
-padding: 12px 24px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-border-radius: 5px;
-`
+  background-color: white;
+  border: none;
+  color: #4caf50;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+`;
 
 const DefaultLabel = styled.label`
   color: white;
@@ -32,57 +32,51 @@ const DefaultLabel = styled.label`
   padding: 0.75em;
 
   display: block !important;
-`
+`;
 
-const Label = DefaultLabel
+const Label = DefaultLabel;
 
 const Button = styled(DefaultButton)`
   border-radius: 0px 5px 5px 0px;
   width: 25%;
   display: block;
-`
+`;
 
 const StyledOutput = styled(DefaultOutput)`
   border-radius: 5px 0px 0px 5px;
   width: 75%;
   display: block;
-`
+`;
 
 interface IOutput {
-  value : string,
-  className : string,
-  label : string,
-  labelId : string
+  value: string;
+  className: string;
+  label: string;
+  labelId: string;
 }
 
-const Output : React.FC<IOutput> = ({ value, className, label, labelId }) => {
-  const copyContent = (event : any) => {
-    event.preventDefault()
+const Output: React.FC<IOutput> = ({value, className, label, labelId}) => {
+  const copyContent = (event: any) => {
+    event.preventDefault();
 
-    return navigator.clipboard.writeText(value)
-  }
+    return navigator.clipboard.writeText(value);
+  };
 
-  const disabled = !value
+  const disabled = !value;
 
   return (
     <div className={`${className}`}>
       <Label htmlFor={labelId}>{label}</Label>
       <div className={'horizontal-stack'}>
-        <StyledOutput
-          id={labelId}
-          readOnly
-          disabled={disabled}
-          value={value} />
-        <Button
-          type='button'
-          disabled={disabled}
-          onClick={copyContent}>COPY</Button>
+        <StyledOutput id={labelId} readOnly disabled={disabled} value={value} />
+        <Button type="button" disabled={disabled} onClick={copyContent}>
+          <i className="material-icons">file_copy</i>
+        </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-const PublicOutput = styled(Output)`
-`
+const PublicOutput = styled(Output)``;
 
-export default React.memo(PublicOutput)
+export default React.memo(PublicOutput);

@@ -163,7 +163,7 @@ const MainPage: React.FC = () => {
           onClick={generatePassword}
           type="button"
           className={'form-component'}>
-          GENERATE
+          GENERATE <i className="material-icons">vpn_key</i>
         </Button>
         <br />
         <br />
@@ -184,7 +184,7 @@ const MainPage: React.FC = () => {
           type="button"
           disabled={!current.password}
           className={'form-component'}>
-          REFRESH
+          REFRESH <i className="material-icons">refresh</i>
         </Button>
       </div>
     </Form>

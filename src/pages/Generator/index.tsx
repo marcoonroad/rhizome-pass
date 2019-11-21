@@ -38,7 +38,6 @@ const Form = styled.form`
   padding-top: 25px;
   margin: 0 auto;
   display: block;
-  margin-bottom: 50px;
 
   width: 80%;
 `;

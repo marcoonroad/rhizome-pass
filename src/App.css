@@ -94,14 +94,19 @@ button:disabled {
   */
 }
 
-.footer-text {
+span.footer-text {
   display: inline-block;
   width: 100%;
-  margin: 0 auto;
   color: white;
   padding-right: 2em;
   text-align: right;
   font-family: 'Inconsolata', monospace;
+  /*
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0;
+  margin-right: 0;
+  */
 }
 
 .tab-selector {
@@ -284,9 +289,15 @@ body > * {
   display: block;
   font-size: 1.1em;
   text-align: justify;
+  /*
   padding-bottom: 50px;
+  */
 }
 
 .disabled-link {
   pointer-events: none;
+}
+
+.no-bottom-padding-hack {
+  padding-bottom: 0 !important;
 }

@@ -19,19 +19,20 @@ import GeneratorOfflineComponent from '../../pages/Generator';
 import stopIcon from '../../assets/images/stop.png';
 
 const Footer = styled.div`
-  flex-grow: 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-color: #282c34;
-  padding-bottom: 1em;
-  padding-top: 1.5em;
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 3em;
 `;
 
 const FooterContent = styled.div`
   width: 80%;
-  margin: 0 auto;
+  display: block;
 `;
 
 const NavDiv = styled.div`
@@ -75,7 +76,9 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             activeClassName="tab-selector-active"
             title="Generator"
             onClick={clickGenerator}>
-            Generator <i className="material-icons">lock_outline</i>
+            <i className="material-icons">lock_outline</i>
+            <br />
+            Generator
           </NavLink>
         </Li>
         <Li className="tab-wrapper">
@@ -85,7 +88,9 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             activeClassName="tab-selector-active"
             title="Manager"
             onClick={clickManager}>
-            Manager <i className="material-icons">sync</i>
+            <i className="material-icons">sync</i>
+            <br />
+            Manager
           </NavLink>
         </Li>
         <Li className="tab-wrapper">
@@ -95,7 +100,9 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             activeClassName="tab-selector-active"
             title="About"
             onClick={clickAbout}>
-            About <i className="material-icons">info_outline</i>
+            <i className="material-icons">info_outline</i>
+            <br />
+            About
           </NavLink>
         </Li>
       </Ul>
@@ -172,6 +179,10 @@ const GeneratorComponent: React.FC = () => {
   );
 };
 
+const InnerDiv = styled.div`
+  padding-bottom: 3.5em;
+`;
+
 const Content: React.FC = () => {
   const [current, update] = React.useState({
     visible: false,
@@ -212,7 +223,7 @@ const Content: React.FC = () => {
       <Router>
         <Header title={'Fountain Pass'} subtitle={'Offline Password Manager'} />
 
-        <div>
+        <InnerDiv>
           <HeaderNav
             disabled={false}
             clickGenerator={hideFooter}
@@ -225,7 +236,7 @@ const Content: React.FC = () => {
             <Route path="/about" component={AboutComponent} />
             <Route render={() => <Redirect to="/generator" />} />
           </Switch>
-        </div>
+        </InnerDiv>
 
         <FooterComponent online={current.online} />
       </Router>

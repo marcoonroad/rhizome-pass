@@ -98,7 +98,7 @@ const ManagerComponent: React.FC = () => {
 
       <hr />
 
-      <p>
+      <p className="no-bottom-padding-hack">
         <span>{aboutExport}</span>
         <br />
         <br />

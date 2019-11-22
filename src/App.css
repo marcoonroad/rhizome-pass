@@ -58,6 +58,10 @@ body {
   flex-grow: 1;
 }
 
+input {
+  font-family: 'Inconsolata', monospace;
+}
+
 button.form-component {
   width: 100% !important;
 }

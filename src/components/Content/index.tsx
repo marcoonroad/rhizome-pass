@@ -114,16 +114,8 @@ interface IFooter {
   online: boolean;
 }
 
-declare const gtag: any;
-
 const FooterComponent: React.FC<IFooter> = ({online}) => {
   const location = useLocation();
-
-  React.useEffect(() => {
-    gtag('config', 'UA-41209773-3', {
-      page_path: location.pathname,
-    });
-  }, [location, online]);
 
   if (location.pathname === '/generator') {
     return null;

@@ -59,9 +59,13 @@ const MainPage: React.FC = () => {
   const serviceRef = React.useRef<HTMLInputElement | null>(null);
 
   const computePass = (hashImage: string) => {
-    return Crypto.asBase64(hashImage)
-      .replace(/\//g, '')
-      .substr(0, 12);
+    return Crypto.asPassword(hashImage, {
+      length: 12,
+      digit: true,
+      upper: true,
+      lower: true,
+      special: true,
+    });
   };
 
   const computePairs = async (data: string, salt: string, initialNonce = 0) => {

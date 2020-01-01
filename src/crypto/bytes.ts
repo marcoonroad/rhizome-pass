@@ -1,19 +1,16 @@
-const fromString = function (text : string) {
-  const encoder = new TextEncoder()
-  const buffer = encoder.encode(text)
-  const list : number[] = JSON.parse(`[${buffer.toString()}]`)
-  const array = new Uint8Array(list.length)
-  list.forEach(function (value, index) {
-    array[index] = value
-  })
-  return array
-}
+const fromString = function(text: string) {
+  const chars = [];
+  for (let index = 0; index < text.length; index += 1) {
+    chars.push(text.charCodeAt(index));
+  }
+  return new Uint8Array(chars);
+};
 
-const toString = function (bytes : Uint8Array) {
-  const decoder = new TextDecoder('utf-8')
-  return decoder.decode(bytes)
-}
+const toString = function(bytes: ArrayBuffer | Uint8Array | any[]) {
+  const bytesArray = new Uint8Array(bytes as any) as any;
+  return String.fromCharCode.apply(null, bytesArray);
+};
 
-const Bytes = { toString, fromString }
+const Bytes = {toString, fromString};
 
-export default Bytes
+export default Bytes;

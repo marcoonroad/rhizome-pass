@@ -79,12 +79,13 @@ const ManagerComponent: React.FC = () => {
   return (
     <div className="form-container about-container manager-container">
       <p>
-        <span>{aboutImport}</span>
-        <br />
-        <br />
-
         <span className="horizontal-stack">
-          <span className="manager-action-label">Import Blacklist</span>
+          <span className="manager-action-label">
+            {'Import Blacklist '}
+            <i className="material-icons" onClick={() => alert(aboutImport)}>
+              help
+            </i>
+          </span>
           <TextStatus
             label="SUCCESS!"
             className="manager-text-status"
@@ -99,12 +100,13 @@ const ManagerComponent: React.FC = () => {
       <hr />
 
       <p className="no-bottom-padding-hack">
-        <span>{aboutExport}</span>
-        <br />
-        <br />
-
         <span className="horizontal-stack">
-          <span className="manager-action-label">Export Blacklist</span>
+          <span className="manager-action-label">
+            {'Export Blacklist '}
+            <i className="material-icons" onClick={() => alert(aboutExport)}>
+              help
+            </i>
+          </span>
           <TextStatus
             label="SUCCESS!"
             className="manager-text-status"

@@ -121,7 +121,7 @@ const AboutPage: React.FC = () => {
             href="https://github.com/marcoonroad/fountain"
             className="text-link"
             title="Fountain Pass repository">
-            https://github.com/marcoonroad/fountain
+            github.com/marcoonroad/fountain
           </a>
         </span>
         <br />

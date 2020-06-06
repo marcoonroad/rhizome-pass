@@ -172,7 +172,7 @@ const MainPage: React.FC = () => {
         <br />
       </div>
 
-      <hr />
+      <hr className="content-line-separator" />
 
       <div>
         <Output

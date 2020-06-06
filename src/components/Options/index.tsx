@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DefaultLabel = styled.label`
-  color: white;
+  color: black;
   font-family: 'Inconsolata', monospace;
   display: inline-block;
   padding: 0.75em;

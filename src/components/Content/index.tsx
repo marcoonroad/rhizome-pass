@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   BrowserRouter as Router,
   Route,
-  NavLink,
+  NavLink as RealNavLink,
   Switch,
   Redirect,
   useLocation,
@@ -18,6 +18,7 @@ import GeneratorOfflineComponent from '../../pages/Generator';
 
 import stopIcon from '../../assets/images/stop.png';
 
+const HistoryComponent: React.FC = () => <div></div>;
 const Footer = styled.div`
   display: flex;
   align-items: center;
@@ -28,6 +29,7 @@ const Footer = styled.div`
   bottom: 0;
   width: 100%;
   height: 3em;
+  display: none;
 `;
 
 const FooterContent = styled.div`
@@ -35,9 +37,27 @@ const FooterContent = styled.div`
   display: block;
 `;
 
-const NavDiv = styled.div`
-  width: 80%;
+const AbsoluteNavDiv = styled.div`
+  width: 100%;
   margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  top: auto;
+  left: auto;
+  right: auto;
+  z-index: 500;
+`;
+
+const RelativeNavDiv = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  bottom: 0;
+  top: auto;
+  left: auto;
+  right: auto;
+  opacity: 0;
+  z-index: 5;
 `;
 
 const Ul = styled.ul`
@@ -56,6 +76,7 @@ interface IHeaderNav {
   clickGenerator: () => void;
   clickManager: () => void;
   clickAbout: () => void;
+  mockBottomPadding?: boolean;
 }
 
 const HeaderNav: React.FC<IHeaderNav> = function({
@@ -63,8 +84,12 @@ const HeaderNav: React.FC<IHeaderNav> = function({
   clickGenerator,
   clickManager,
   clickAbout,
+  mockBottomPadding,
 }) {
-  const disabledClass = disabled ? 'disabled-link' : '';
+  const disabledClass = disabled || mockBottomPadding ? 'disabled-link' : '';
+
+  const NavDiv = mockBottomPadding ? RelativeNavDiv : AbsoluteNavDiv;
+  const NavLink = mockBottomPadding ? styled.div`` : RealNavLink;
 
   return (
     <NavDiv>
@@ -79,6 +104,18 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             <i className="material-icons">lock_outline</i>
             <br />
             Generator
+          </NavLink>
+        </Li>
+        <Li className="tab-wrapper">
+          <NavLink
+            to="/history"
+            className={`tab-selector ${disabledClass}`}
+            activeClassName="tab-selector-active"
+            title="History"
+            onClick={clickGenerator}>
+            <i className="material-icons">history</i>
+            <br />
+            History
           </NavLink>
         </Li>
         <Li className="tab-wrapper">
@@ -172,7 +209,7 @@ const GeneratorComponent: React.FC = () => {
 };
 
 const InnerDiv = styled.div`
-  padding-bottom: 3.5em;
+  padding-bottom: 0.75em;
 `;
 
 const Content: React.FC = () => {
@@ -226,11 +263,20 @@ const Content: React.FC = () => {
             <Route path="/generator" component={GeneratorComponent} />
             <Route path="/manager" component={ManagerComponent} />
             <Route path="/about" component={AboutComponent} />
+            <Route path="/history" component={HistoryComponent} />
             <Route render={() => <Redirect to="/generator" />} />
           </Switch>
         </InnerDiv>
 
         <FooterComponent online={current.online} />
+
+        <HeaderNav
+          disabled={true}
+          clickGenerator={() => null}
+          clickManager={() => null}
+          clickAbout={() => null}
+          mockBottomPadding={true}
+        />
       </Router>
     </div>
   );

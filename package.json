@@ -18,7 +18,9 @@
   "author": "Marco Aurélio da Silva <marcoonroad@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "predeploy": "yarn run build && mv build/index.html build/200.html",
+    "surgeignore": "cp .surgeignore build/",
+    "assetlinks": "mkdir -p build/.well-known && cp .well-known/assetlinks.json build/.well-known/",
+    "predeploy": "yarn run build && mv build/index.html build/200.html && yarn assetlinks && yarn surgeignore",
     "deploy": "surge --project ./build --domain https://fountain-pass.surge.sh",
     "predeploy:prod": "yarn run build",
     "deploy:prod": "gh-pages -b gh-pages -d ./build",

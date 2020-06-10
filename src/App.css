@@ -340,3 +340,21 @@ body > * {
 .no-bottom-padding-hack {
   padding-bottom: 0 !important;
 }
+
+.checkbox-container i.material-icons {
+  font-size: 1.1em;
+  vertical-align: middle;
+  padding: auto;
+}
+
+.checkbox-container span {
+  font-size: 1.1em;
+  vertical-align: middle;
+  padding: auto;
+}
+
+h2.password-options-title {
+  font-size: 1.25em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

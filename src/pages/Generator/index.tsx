@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Crypto from '../../crypto';
 import Blacklist from '../../utils/blacklist';
+import Storage from '../../utils/storage';
 import Password from '../../components/Password';
 import Options from '../../components/Options';
 import Output from '../../components/Output';
@@ -61,10 +62,10 @@ const MainPage: React.FC = () => {
   const computePass = (hashImage: string) => {
     return Crypto.asPassword(hashImage, {
       length: 12,
-      digit: true,
-      upper: true,
+      digit: !Storage.get('settings-no-digit-char'),
+      upper: !Storage.get('settings-no-upper-char'),
       lower: true,
-      special: true,
+      special: !Storage.get('settings-no-special-char'),
     });
   };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TextStatus from '../../components/TextStatus';
 import Blacklist from '../../utils/blacklist';
+import Storage from '../../utils/storage';
 
 const DefaultButton = styled.button`
   background-color: #4caf50;
@@ -40,7 +41,23 @@ const ManagerComponent: React.FC = () => {
   const [current, update] = React.useState({
     importStatus: false,
     exportStatus: false,
+    withDigit: false,
+    withUpper: false,
+    withSpecial: false,
   });
+
+  React.useEffect(() => {
+    const withDigit = !Storage.get('settings-no-digit-char');
+    const withUpper = !Storage.get('settings-no-upper-char');
+    const withSpecial = !Storage.get('settings-no-special-char');
+
+    update(current => ({
+      ...current,
+      withDigit,
+      withUpper,
+      withSpecial,
+    }));
+  }, []);
 
   React.useEffect(() => {
     const timeoutHandler = setTimeout(() => {
@@ -99,9 +116,7 @@ const ManagerComponent: React.FC = () => {
         </Button>
       </p>
 
-      <hr className="content-line-separator" />
-
-      <p className="no-bottom-padding-hack">
+      <p>
         <span className="horizontal-flex-stack">
           <span className="manager-action-label">
             Export Blacklist
@@ -120,6 +135,69 @@ const ManagerComponent: React.FC = () => {
         <Button onClick={exportBlacklist} className={'form-component'}>
           EXPORT <i className="material-icons">arrow_upward</i>
         </Button>
+      </p>
+
+      <hr className="content-line-separator" />
+
+      <p>
+        <h2 className="password-options-title">Output Password Options</h2>
+      </p>
+
+      <p>
+        <span
+          className="checkbox-container"
+          onClick={() => {
+            update(current => {
+              Storage.set('settings-no-digit-char', current.withDigit);
+              return {
+                ...current,
+                withDigit: !current.withDigit,
+              };
+            });
+          }}>
+          <i className="material-icons">
+            {current.withDigit ? 'check_box' : 'check_box_outline_blank'}
+          </i>{' '}
+          <span>With Digits</span>
+        </span>
+      </p>
+
+      <p>
+        <span
+          className="checkbox-container"
+          onClick={() => {
+            update(current => {
+              Storage.set('settings-no-upper-char', current.withUpper);
+              return {
+                ...current,
+                withUpper: !current.withUpper,
+              };
+            });
+          }}>
+          <i className="material-icons">
+            {current.withUpper ? 'check_box' : 'check_box_outline_blank'}
+          </i>{' '}
+          <span>With Uppercase Letters</span>
+        </span>
+      </p>
+
+      <p>
+        <span
+          className="checkbox-container"
+          onClick={() => {
+            update(current => {
+              Storage.set('settings-no-special-char', current.withSpecial);
+              return {
+                ...current,
+                withSpecial: !current.withSpecial,
+              };
+            });
+          }}>
+          <i className="material-icons">
+            {current.withSpecial ? 'check_box' : 'check_box_outline_blank'}
+          </i>{' '}
+          <span>With Special Chars</span>
+        </span>
       </p>
     </div>
   );

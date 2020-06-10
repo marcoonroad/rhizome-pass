@@ -125,7 +125,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             activeClassName="tab-selector-active"
             title="Manager"
             onClick={clickManager}>
-            <i className="material-icons">sync</i>
+            <i className="material-icons">settings</i>
             <br />
             Manager
           </NavLink>

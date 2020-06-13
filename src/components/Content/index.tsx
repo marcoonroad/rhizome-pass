@@ -250,7 +250,7 @@ const Content: React.FC = () => {
   return (
     <div id={'content'}>
       <Router>
-        <Header title={'Fountain Pass'} subtitle={'Offline Password Manager'} />
+        <Header title={'Rhizome Pass'} subtitle={'Offline Password Manager'} />
 
         <InnerDiv>
           <HeaderNav

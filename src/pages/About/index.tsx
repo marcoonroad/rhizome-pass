@@ -25,13 +25,13 @@ const Button = styled(DefaultButton)`
 
 const SHARE_TITLE = 'Give a try for this password manager!';
 const SHARE_TEXT =
-  'Fountain Pass is a Secure Offline Password Generator/Manager.';
-const SHARE_URL = 'https://fountain-pass.surge.sh';
+  'Rhizome Pass is a Secure Offline Password Generator/Manager.';
+const SHARE_URL = 'https://rhizome-pass.surge.sh';
 
 // TODO: abstract the whole animation as a separated component
 
 const lines = [
-  'Fountain Pass is an offline password manager / generator',
+  'Rhizome Pass is an offline password manager / generator',
   'developed by @marcoonroad (Marco Aurélio da Silva). This',
   'password generator uses cryptographic primitives such as',
   "HMAC, hashes, KDF and PRNG. We don't store anything except",
@@ -118,10 +118,10 @@ const AboutPage: React.FC = () => {
         <span>
           <i className="material-icons">link</i>{' '}
           <a
-            href="https://github.com/marcoonroad/fountain"
+            href="https://github.com/marcoonroad/rhizome"
             className="text-link"
-            title="Fountain Pass repository">
-            github.com/marcoonroad/fountain
+            title="Rhizome Pass repository">
+            github.com/marcoonroad/rhizome
           </a>
         </span>
         <br />

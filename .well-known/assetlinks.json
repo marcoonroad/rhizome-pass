@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.marcoonroad.rhizomepass",
+      "sha256_cert_fingerprints": [
+        "6C:F8:BD:58:71:45:2C:91:37:EF:88:8B:5B:E9:ED:23:C7:22:F5:BB:AD:82:25:C3:DC:95:AE:68:C6:2A:E1:24"
+      ]
+    }
+  }
+]

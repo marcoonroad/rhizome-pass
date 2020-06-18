@@ -1,16 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.d93fe625.chunk.css",
-    "main.js": "/static/js/main.92c0ad17.chunk.js",
-    "main.js.map": "/static/js/main.92c0ad17.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/js/2.9deec18e.chunk.js": "/static/js/2.9deec18e.chunk.js",
-    "static/js/2.9deec18e.chunk.js.map": "/static/js/2.9deec18e.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.f874c1eb0948c649e1b0592337dd3bc9.js": "/precache-manifest.f874c1eb0948c649e1b0592337dd3bc9.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.d93fe625.chunk.css.map": "/static/css/main.d93fe625.chunk.css.map",
-    "static/media/stop.png": "/static/media/stop.18538452.png"
+    "main.css": "./static/css/main.a05a14de.chunk.css",
+    "main.js": "./static/js/main.b130e320.chunk.js",
+    "main.js.map": "./static/js/main.b130e320.chunk.js.map",
+    "runtime~main.js": "./static/js/runtime~main.50987f83.js",
+    "runtime~main.js.map": "./static/js/runtime~main.50987f83.js.map",
+    "static/js/2.65e1de4c.chunk.js": "./static/js/2.65e1de4c.chunk.js",
+    "static/js/2.65e1de4c.chunk.js.map": "./static/js/2.65e1de4c.chunk.js.map",
+    "static/js/3.6462cff6.chunk.js": "./static/js/3.6462cff6.chunk.js",
+    "static/js/3.6462cff6.chunk.js.map": "./static/js/3.6462cff6.chunk.js.map",
+    "static/js/4.1bc48eca.chunk.js": "./static/js/4.1bc48eca.chunk.js",
+    "static/js/4.1bc48eca.chunk.js.map": "./static/js/4.1bc48eca.chunk.js.map",
+    "static/js/5.18a3e7a3.chunk.js": "./static/js/5.18a3e7a3.chunk.js",
+    "static/js/5.18a3e7a3.chunk.js.map": "./static/js/5.18a3e7a3.chunk.js.map",
+    "static/js/6.c76cd7ee.chunk.js": "./static/js/6.c76cd7ee.chunk.js",
+    "static/js/6.c76cd7ee.chunk.js.map": "./static/js/6.c76cd7ee.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.0a6d0e7063c613f7e37708d70dfa1389.js": "./precache-manifest.0a6d0e7063c613f7e37708d70dfa1389.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.a05a14de.chunk.css.map": "./static/css/main.a05a14de.chunk.css.map",
+    "static/media/stop.png": "./static/media/stop.18538452.png"
   }
 }

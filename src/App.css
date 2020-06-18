@@ -95,13 +95,13 @@ input:focus {
 }
 
 button:hover {
-  background-color: #4caf50;
-  font-weight: normal;
+  /* background-color: #4caf50; */
+  /* font-weight: normal; */
 }
 
 button:hover:disabled {
-  background-color: #4caf50;
-  font-weight: normal;
+  /* background-color: #4caf50; */
+  /* font-weight: normal; */
 }
 
 button:disabled {
@@ -357,4 +357,10 @@ h2.password-options-title {
   font-size: 1.25em;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.password-output input {
+  border-color: #4caf50;
+  border-style: solid;
+  border-width: 2px;
 }

@@ -127,6 +127,8 @@ const TextInput: React.FC<ITextInput> = props => {
             onFocus={allowEdit}
             onBlur={disallowEdit}
             value={state.value}
+            autoCorrect="off"
+            autoCapitalize="none"
           />
         </Div>
         <Button type="button" disabled={noValue()} onClick={clearSelection}>

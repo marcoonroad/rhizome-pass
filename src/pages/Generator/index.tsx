@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import swal from '@sweetalert/with-react';
 
 import Crypto from '../../crypto';
 import Blacklist from '../../utils/blacklist';
@@ -7,7 +8,7 @@ import Storage from '../../utils/storage';
 import Password from '../../components/Password';
 import TextInput from '../../components/TextInput';
 import Options from '../../components/Options';
-import Output from '../../components/Output';
+import PasswordOutputModal from '../../modals/PasswordOutput';
 
 const DefaultButton = styled.button`
   background-color: #4caf50;
@@ -94,6 +95,26 @@ const MainPage: React.FC = () => {
     return {hashImage, newPassword, nonce, derivedKey};
   };
 
+  const refreshPassword = async function(event: any) {
+    event.preventDefault();
+
+    if (current.hashImage && current.derivedKey) {
+      const nonce = current.nonce + 1;
+      const hexHashImage = Crypto.asHex(current.hashImage);
+      console.log('Refreshing the new HMAC nonce: ' + nonce);
+      const hashImage = await Crypto.hmac(
+        'SHA-512',
+        nonce.toString(),
+        current.derivedKey
+      );
+      const newPassword = computePass(hashImage);
+
+      Blacklist.add(hexHashImage);
+
+      update({...current, hashImage, password: newPassword, nonce});
+    }
+  };
+
   const generatePassword = async function(event: any) {
     event.preventDefault();
 
@@ -132,25 +153,25 @@ const MainPage: React.FC = () => {
     });
   };
 
-  const refreshPassword = async function(event: any) {
-    event.preventDefault();
-
-    if (current.hashImage && current.derivedKey) {
-      const nonce = current.nonce + 1;
-      const hexHashImage = Crypto.asHex(current.hashImage);
-      console.log('Refreshing the new HMAC nonce: ' + nonce);
-      const hashImage = await Crypto.hmac(
-        'SHA-512',
-        nonce.toString(),
-        current.derivedKey
-      );
-      const newPassword = computePass(hashImage);
-
-      Blacklist.add(hexHashImage);
-
-      update({...current, hashImage, password: newPassword, nonce});
+  React.useEffect(() => {
+    if (current.password) {
+      swal({
+        content: (
+          <PasswordOutputModal
+            password={current.password}
+            refreshPassword={refreshPassword}
+            outputId={outputId}
+          />
+        ),
+        buttons: false,
+      });
     }
-  };
+    return () => {
+      if (current.password) {
+        swal.close();
+      }
+    };
+  });
 
   return (
     <Form className={'form-container'}>
@@ -189,25 +210,6 @@ const MainPage: React.FC = () => {
         </Button>
         <br />
         <br />
-      </div>
-
-      <hr className="content-line-separator" />
-
-      <div>
-        <Output
-          value={current.password}
-          labelId={outputId}
-          label={'Output Password'}
-          className={'form-component'}
-        />
-        <br />
-        <Button
-          onClick={refreshPassword}
-          type="button"
-          disabled={!current.password}
-          className={'form-component'}>
-          REFRESH <i className="material-icons">refresh</i>
-        </Button>
       </div>
     </Form>
   );

@@ -212,7 +212,7 @@ const Content: React.FC = () => {
 
   return (
     <div id={'content'}>
-      <Router>
+      <Router basename="/rhizome-pass">
         <Header title={'Fountain Pass'} subtitle={'Offline Password Manager'} />
 
         <InnerDiv>

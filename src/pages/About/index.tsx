@@ -26,7 +26,7 @@ const Button = styled(DefaultButton)`
 const SHARE_TITLE = 'Give a try for this password manager!';
 const SHARE_TEXT =
   'Fountain Pass is a Secure Offline Password Generator/Manager.';
-const SHARE_URL = 'https://fountain-pass.surge.sh';
+const SHARE_URL = 'https://marcoonroad.dev/rhizome-pass';
 
 // TODO: abstract the whole animation as a separated component
 

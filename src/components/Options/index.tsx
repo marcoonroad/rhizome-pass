@@ -100,7 +100,7 @@ const Options: React.FC<IOptions> = ({
     }
   };
 
-  const hasValue = () => {
+  const noValue = () => {
     return !current.value;
   };
 
@@ -118,7 +118,7 @@ const Options: React.FC<IOptions> = ({
           />
           <datalist id={listId}>{values.map(asOption)}</datalist>
         </Div>
-        <Button type="button" disabled={hasValue()} onClick={clearSelection}>
+        <Button type="button" disabled={noValue()} onClick={clearSelection}>
           <i className="material-icons">clear</i>
         </Button>
       </div>

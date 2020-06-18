@@ -44,6 +44,12 @@ const Button = styled(DefaultButton)`
 
 const Input = styled(DefaultInput)`
   border-radius: 5px 0px 0px 5px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+`;
+
+const Div = styled.div`
   width: 75%;
   display: block;
 `;
@@ -102,19 +108,37 @@ const Password: React.FC<IPassword> = initialPassword => {
     return () => clearTimeout(timeout);
   }, [currentPassword.visible]);
 
+  const allowEdit = () => {
+    if (passwordInput.current) {
+      passwordInput.current.readOnly = false;
+    }
+  };
+
+  const disallowEdit = () => {
+    if (passwordInput.current) {
+      passwordInput.current.readOnly = true;
+    }
+  };
+
   return (
     <div className={initialPassword.className}>
       <Label htmlFor={id}>{initialPassword.label}</Label>
       <div className={'horizontal-stack'}>
-        <Input
-          id={id}
-          type={inputType}
-          value={currentPassword.value}
-          ref={passwordInput}
-          onMouseEnter={grabInputFocus}
-          onChange={updatePassword}
-          placeholder={placeholder}
-        />
+        <Div className={'horizontal-stack'}>
+          <Input
+            id={id}
+            type={inputType}
+            value={currentPassword.value}
+            ref={passwordInput}
+            onMouseEnter={undefined}
+            onChange={updatePassword}
+            placeholder={placeholder}
+            autoComplete={'off'}
+            readOnly
+            onFocus={allowEdit}
+            onBlur={disallowEdit}
+          />
+        </Div>
         <Button onClick={toggleVisibility}>{buttonText}</Button>
       </div>
     </div>

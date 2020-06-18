@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 import Crypto from '../../crypto';
 import Blacklist from '../../utils/blacklist';
+import Storage from '../../utils/storage';
 import Password from '../../components/Password';
+import TextInput from '../../components/TextInput';
 import Options from '../../components/Options';
 import Output from '../../components/Output';
 
@@ -43,11 +45,13 @@ const Form = styled.form`
 `;
 
 const MainPage: React.FC = () => {
+  const usernameId = 'master-username-id';
   const passwordId = 'master-password-id';
   const optionsId = 'external-services-id';
   const outputId = 'generated-password-id';
 
   const [current, update] = React.useState({
+    username: '',
     password: '',
     hashImage: '',
     derivedKey: '',
@@ -55,16 +59,17 @@ const MainPage: React.FC = () => {
     nonce: 0,
   });
 
-  const masterPasswordRef = React.useRef<HTMLInputElement | null>(null);
-  const serviceRef = React.useRef<HTMLInputElement | null>(null);
+  const masterPasswordRef = React.useRef<HTMLInputElement>(null);
+  const masterUsernameRef = React.useRef<HTMLInputElement>(null);
+  const serviceRef = React.useRef<HTMLInputElement>(null);
 
   const computePass = (hashImage: string) => {
     return Crypto.asPassword(hashImage, {
       length: 12,
-      digit: true,
-      upper: true,
+      digit: !Storage.get('settings-no-digit-char'),
+      upper: !Storage.get('settings-no-upper-char'),
       lower: true,
-      special: true,
+      special: !Storage.get('settings-no-special-char'),
     });
   };
 
@@ -92,17 +97,22 @@ const MainPage: React.FC = () => {
   const generatePassword = async function(event: any) {
     event.preventDefault();
 
-    const data =
+    const user =
+      masterUsernameRef.current !== null ? masterUsernameRef.current.value : '';
+    const pass =
       masterPasswordRef.current !== null ? masterPasswordRef.current.value : '';
-    const salt = serviceRef.current !== null ? serviceRef.current.value : '';
+    const service = serviceRef.current !== null ? serviceRef.current.value : '';
 
-    if (data === '' || salt === '') {
-      alert('You must fill both the master password and service fields!');
+    if (user === '' || pass === '' || service === '') {
+      alert('You must fill the username, master password and service fields!');
       return;
     }
 
+    const salt = service;
+    const data = user + '\n' + pass;
+
     // no changes from form inputs since last operation?
-    const saltAndData = salt + ',' + data;
+    const saltAndData = [service, user, pass].join('\n');
     const initialNonce =
       current.saltAndData === saltAndData ? current.nonce : undefined;
 
@@ -145,6 +155,15 @@ const MainPage: React.FC = () => {
   return (
     <Form className={'form-container'}>
       <div>
+        <TextInput
+          customRef={masterUsernameRef}
+          labelId={usernameId}
+          value={''}
+          label={'Master Username'}
+          className={'form-component'}
+          placeholder={'username'}
+        />
+        <br />
         <Password
           customRef={masterPasswordRef}
           labelId={passwordId}
@@ -172,7 +191,7 @@ const MainPage: React.FC = () => {
         <br />
       </div>
 
-      <hr />
+      <hr className="content-line-separator" />
 
       <div>
         <Output

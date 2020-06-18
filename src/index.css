@@ -6,7 +6,9 @@ body {
     sans-serif;
   */
   font-family: 'Inconsolata', monospace;
+  /*
   font-variant: small-caps;
+  */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

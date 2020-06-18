@@ -1,28 +1,28 @@
 navigator.storage.persisted().then(async persisted => {
   if (!persisted) {
-    await navigator.storage.persist()
+    await navigator.storage.persist();
   }
-})
+});
 
-const PREFIX = 'fountain-pass-'
-const storage = localStorage
+const PREFIX = 'rhizome-pass-';
+const storage = localStorage;
 
-const set = (key : string, value : any) => {
+const set = (key: string, value: any) => {
   if (value === null || value === undefined) {
-    storage.removeItem(PREFIX + key)
+    storage.removeItem(PREFIX + key);
   } else {
-    storage.setItem(PREFIX + key, JSON.stringify(value))
+    storage.setItem(PREFIX + key, JSON.stringify(value));
   }
-}
+};
 
-const get = (key : string) => {
-  const result = storage.getItem(PREFIX + key)
+const get = (key: string) => {
+  const result = storage.getItem(PREFIX + key);
 
   if (typeof result === 'string') {
-    return JSON.parse(result)
+    return JSON.parse(result);
   }
 
-  return null
-}
+  return null;
+};
 
-export default { get, set }
+export default {get, set};

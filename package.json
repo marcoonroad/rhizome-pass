@@ -1,5 +1,5 @@
 {
-  "name": "fountain",
+  "name": "rhizome-pass",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,7 +21,7 @@
     "surgeignore": "cp .surgeignore build/",
     "assetlinks": "mkdir -p build/.well-known && cp .well-known/assetlinks.json build/.well-known/",
     "predeploy": "yarn run build && mv build/index.html build/200.html && yarn assetlinks && yarn surgeignore",
-    "deploy": "surge --project ./build --domain https://fountain-pass.surge.sh",
+    "deploy": "surge --project ./build --domain https://rhizome-pass.surge.sh",
     "predeploy:prod": "yarn run build",
     "deploy:prod": "gh-pages -b gh-pages -d ./build",
     "android:off": "adb reverse --remove-all",
@@ -29,7 +29,7 @@
     "predebug": "yarn run android:on && echo 'Device is listening at http://localhost:4000 address...'",
     "android:open": "adb shell am start -a android.intent.action.VIEW -d",
     "android:open:local": "yarn run android:open http://localhost:4000",
-    "android:open:site": "yarn run android:open https://fountain-pass.surge.sh",
+    "android:open:site": "yarn run android:open https://rhizome-pass.surge.sh",
     "debug": "yarn run start",
     "start": "react-scripts start",
     "build": "react-scripts build",

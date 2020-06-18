@@ -45,7 +45,13 @@ body {
 }
 
 body {
-  background-color: #444455;
+  /* background-color: #444455; */
+  /* background-color: #f1f1f1; */
+  background-color: #d0d0d0;
+}
+
+hr.content-line-separator {
+  border: 0.5px solid black;
 }
 
 .form-component {
@@ -69,6 +75,14 @@ button.form-component {
 .horizontal-stack {
   width: 100% !important;
   display: flex !important;
+}
+
+.horizontal-flex-stack {
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 button {
@@ -139,13 +153,13 @@ span.footer-text {
 }
 
 .tab-wrapper {
-  border-bottom-style: solid !important;
-  border-bottom-width: 2px !important;
-  border-bottom-color: #4caf50 !important;
+  border-top-style: solid !important;
+  border-top-width: 2px !important;
+  border-top-color: #4caf50 !important;
 }
 
 .about-container {
-  color: white;
+  color: black;
   font-family: 'Inconsolata', monospace;
   width: 80%;
   margin: 0 auto;
@@ -164,11 +178,13 @@ span.footer-text {
 }
 
 .about-blink-animation-wait {
-  color: rgba(255, 255, 255, 255);
+  /* color: rgba(255, 255, 255, 255); */
+  color: black;
 }
 
 .about-blink-animation-start {
-  color: rgba(255, 255, 255, 255);
+  /* color: rgba(255, 255, 255, 255); */
+  color: black;
   -webkit-animation-name: about-blink-animation-frames; /* Safari 4.0 - 8.0 */
   -webkit-animation-duration: 0.4s; /* Safari 4.0 - 8.0 */
   animation-name: about-blink-animation-frames;
@@ -179,49 +195,62 @@ span.footer-text {
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes about-blink-animation-frames {
   0% {
-    color: rgba(255, 255, 255, 255);
+    /* color: rgba(255, 255, 255, 255); */
+    color: black;
   }
   20% {
-    color: rgba(255, 255, 255, 255);
+    /* color: rgba(255, 255, 255, 255); */
+    color: black;
   }
   40% {
-    color: rgba(255, 255, 255, 255);
+    /* color: rgba(255, 255, 255, 255); */
+    color: black;
   }
   60% {
-    color: rgba(255, 255, 255, 0);
+    /* color: rgba(255, 255, 255, 0); */
+    color: transparent;
   }
   80% {
-    color: rgba(255, 255, 255, 0);
+    /* color: rgba(255, 255, 255, 0); */
+    color: transparent;
   }
   100% {
-    color: rgba(255, 255, 255, 0);
+    /* color: rgba(255, 255, 255, 0); */
+    color: transparent;
   }
 }
 
 /* Standard syntax */
 @keyframes about-blink-animation-frames {
   0% {
-    color: rgba(255, 255, 255, 255);
+    /* color: rgba(255, 255, 255, 255); */
+    color: black;
   }
   20% {
-    color: rgba(255, 255, 255, 255);
+    /* color: rgba(255, 255, 255, 255); */
+    color: black;
   }
   40% {
-    color: rgba(255, 255, 255, 255);
+    /* color: rgba(255, 255, 255, 255); */
+    color: black;
   }
   60% {
-    color: rgba(255, 255, 255, 0);
+    /* color: rgba(255, 255, 255, 0); */
+    color: transparent;
   }
   80% {
-    color: rgba(255, 255, 255, 0);
+    /* color: rgba(255, 255, 255, 0); */
+    color: transparent;
   }
   100% {
-    color: rgba(255, 255, 255, 0);
+    /* color: rgba(255, 255, 255, 0); */
+    color: transparent;
   }
 }
 
 .text-link {
-  color: white;
+  color: black;
+  font-size: 0.85em;
 }
 
 .invisible {
@@ -245,9 +274,15 @@ body > * {
 }
 
 .manager-action-label {
-  display: inline-block;
-  width: 50%;
+  display: flex;
+  /* width: 50%; */
   text-align: left;
+  flex: 2;
+  width: auto;
+}
+
+.manager-help-icon {
+  margin-left: 3px;
 }
 
 .manager-text-status {
@@ -256,9 +291,11 @@ body > * {
   font-weight: bold;
   font-variant: small-caps;
   */
-  display: inline-block;
+  flex: 1;
+  display: flex;
   text-align: right;
-  width: 50%;
+  width: auto;
+  /* width: 50%; */
 }
 
 .eye-icon {
@@ -277,7 +314,7 @@ body > * {
 }
 
 .stop-text {
-  color: white;
+  color: black;
   margin: 0 auto;
   display: block;
   width: 80%;
@@ -287,15 +324,13 @@ body > * {
 
 .stop-subtitle {
   padding-top: 25px;
-  color: white;
+  color: black;
   margin: 0 auto;
   width: 80%;
   display: block;
   font-size: 1.1em;
   text-align: justify;
-  /*
   padding-bottom: 50px;
-  */
 }
 
 .disabled-link {
@@ -304,4 +339,22 @@ body > * {
 
 .no-bottom-padding-hack {
   padding-bottom: 0 !important;
+}
+
+.checkbox-container i.material-icons {
+  font-size: 1.1em;
+  vertical-align: middle;
+  padding: auto;
+}
+
+.checkbox-container span {
+  font-size: 1.1em;
+  vertical-align: middle;
+  padding: auto;
+}
+
+h2.password-options-title {
+  font-size: 1.25em;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

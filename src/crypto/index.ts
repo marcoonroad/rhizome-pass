@@ -37,7 +37,7 @@ interface IPasswordOptions {
 
 const CHARS = {
   DIGIT: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-  UPPER: [
+  LOWER: [
     'a',
     'b',
     'c',
@@ -65,7 +65,7 @@ const CHARS = {
     'y',
     'z',
   ],
-  LOWER: [
+  UPPER: [
     'A',
     'B',
     'C',

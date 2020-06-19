@@ -1,6 +1,7 @@
 {
   "short_name": "Rhizome Pass",
-  "name": "",
+  "name": "Rhizome Pass",
+  "description": "Offline Password Manager.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +22,6 @@
   "start_url": "./generator?source=pwa",
   "display": "standalone",
   "theme_color": "#4CAF50",
-  "background_color": "#444455"
+  "background_color": "#444455",
+  "related_applications": []
 }

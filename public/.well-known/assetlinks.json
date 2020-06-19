@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "sh.surge.fountain_pass.twa",
+      "package_name": "dev.marcoonroad.rhizomepass",
       "sha256_cert_fingerprints": [
-        "42:14:ED:96:BD:16:69:72:AE:AF:86:15:9A:A3:48:26:F3:FE:AD:AD:68:DA:C8:86:F1:B8:AA:ED:0A:10:9E:A7"
+        "EB:F6:1B:33:82:D8:57:81:39:E5:31:2B:F5:5F:4A:87:7A:D6:C2:68:AC:17:36:FE:A0:8E:44:1C:3B:76:D3:E8"
       ]
     }
   }

@@ -11,12 +11,14 @@ import {
 
 import Header from '../Header';
 import OfflineMode from '../../functors/OfflineMode';
-
-import AboutComponent from '../../pages/About';
-import ManagerOfflineComponent from '../../pages/Manager';
-import GeneratorOfflineComponent from '../../pages/Generator';
-
+import ComponentLoader from '../../components/ComponentLoader';
 import stopIcon from '../../assets/images/stop.png';
+
+const AboutComponent = React.lazy(() => import('../../pages/About'));
+const ManagerOfflineComponent = React.lazy(() => import('../../pages/Manager'));
+const GeneratorOfflineComponent = React.lazy(() =>
+  import('../../pages/Generator')
+);
 
 const HistoryComponent: React.FC = () => <div></div>;
 const Footer = styled.div`
@@ -258,13 +260,15 @@ const Content: React.FC = () => {
             clickManager={showFooter}
             clickAbout={showFooter}
           />
-          <Switch>
-            <Route path="/generator" component={GeneratorComponent} />
-            <Route path="/manager" component={ManagerComponent} />
-            <Route path="/about" component={AboutComponent} />
-            <Route path="/history" component={HistoryComponent} />
-            <Route render={() => <Redirect to="/generator" />} />
-          </Switch>
+          <ComponentLoader>
+            <Switch>
+              <Route path="/generator" component={GeneratorComponent} />
+              <Route path="/manager" component={ManagerComponent} />
+              <Route path="/about" component={AboutComponent} />
+              <Route path="/history" component={HistoryComponent} />
+              <Route render={() => <Redirect to="/generator" />} />
+            </Switch>
+          </ComponentLoader>
         </InnerDiv>
 
         <FooterComponent online={current.online} />

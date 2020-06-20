@@ -23,7 +23,7 @@
     "predeploy": "yarn run build && mv build/index.html build/200.html",
     "deploy": "surge --project ./build --domain https://rhizome-pass.surge.sh",
     "predeploy:prod": "yarn run build",
-    "deploy:prod": "gh-pages -b gh-pages -d ./build",
+    "deploy:prod": "gh-pages -t -b gh-pages -d ./build",
     "android:off": "adb reverse --remove-all",
     "android:on": "yarn run android:off && adb reverse tcp:4000 tcp:3000",
     "predebug": "yarn run android:on && echo 'Device is listening at http://localhost:4000 address...'",

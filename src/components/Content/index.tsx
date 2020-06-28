@@ -99,6 +99,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
         <Li className="tab-wrapper">
           <NavLink
             to="/generator"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
             title="Generator"
@@ -111,6 +112,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
         <Li className="tab-wrapper">
           <NavLink
             to="/history"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
             title="History"
@@ -123,6 +125,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
         <Li className="tab-wrapper">
           <NavLink
             to="/manager"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
             title="Manager"
@@ -135,6 +138,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
         <Li className="tab-wrapper">
           <NavLink
             to="/about"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
             title="About"

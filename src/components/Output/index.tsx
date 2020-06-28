@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import TextStatus from '../../components/TextStatus';
+
 const DefaultButton = styled.button`
   background-color: #4caf50;
   border: none;
@@ -25,16 +27,22 @@ const DefaultOutput = styled.input`
   border-radius: 5px;
 `;
 
-const DefaultLabel = styled.label`
+const Span = styled.span`
   color: black;
   font-family: 'Inconsolata', monospace;
-  display: inline-block;
+  display: flex !important;
   padding: 0.75em;
-
-  display: block !important;
+  text-align: left;
+  flex-direction: row;
 `;
 
-const Label = DefaultLabel;
+const Label = styled.label`
+  display: block !important;
+  padding-left: 0em;
+  padding-right: 0.75em;
+  margin-left: 0;
+  margin-right: auto;
+`;
 
 const Button = styled(DefaultButton)`
   border-radius: 0px 5px 5px 0px;
@@ -56,17 +64,45 @@ interface IOutput {
 }
 
 const Output: React.FC<IOutput> = ({value, className, label, labelId}) => {
+  const [state, setState] = React.useState({
+    copyStatus: false,
+  });
+
+  React.useEffect(() => {
+    const timeoutHandler = setTimeout(() => {
+      setState(current => ({
+        ...current,
+        copyStatus: false,
+      }));
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeoutHandler);
+    };
+  }, [state.copyStatus]);
+
   const copyContent = (event: any) => {
     event.preventDefault();
 
-    return navigator.clipboard.writeText(value);
+    navigator.clipboard.writeText(value);
+    setState(current => ({
+      ...current,
+      copyStatus: true,
+    }));
   };
 
   const disabled = !value;
 
   return (
     <div className={`${className}`}>
-      <Label htmlFor={labelId}>{label}</Label>
+      <Span className="horizontal-flex-stack">
+        <Label htmlFor={labelId}>{label}</Label>
+        <TextStatus
+          label="COPIED!"
+          className="manager-text-status"
+          show={state.copyStatus}
+        />
+      </Span>
       <div className={'horizontal-stack'}>
         <StyledOutput id={labelId} readOnly disabled={disabled} value={value} />
         <Button type="button" disabled={disabled} onClick={copyContent}>

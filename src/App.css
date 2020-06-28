@@ -286,16 +286,11 @@ body > * {
 }
 
 .manager-text-status {
-  /*
-  color: #4caf50;
-  font-weight: bold;
-  font-variant: small-caps;
-  */
   flex: 1;
-  display: flex;
+  transition: 0.5s;
   text-align: right;
+  display: inline-block;
   width: auto;
-  /* width: 50%; */
 }
 
 .eye-icon {

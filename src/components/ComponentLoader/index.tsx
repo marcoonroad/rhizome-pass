@@ -31,7 +31,7 @@ const LoadingProgress: React.FC = () => {
 class ErrorBoundary extends React.Component {
   state = {failed: false};
 
-  getDerivedStateFromError(error: Error | string) {
+  static getDerivedStateFromError(error: Error | string) {
     console.error(error);
     return {failed: true};
   }

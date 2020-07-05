@@ -15,12 +15,12 @@ import ComponentLoader from '../../components/ComponentLoader';
 import stopIcon from '../../assets/images/stop.png';
 
 const AboutComponent = React.lazy(() => import('../../pages/About'));
+const AuditOfflineComponent = React.lazy(() => import('../../pages/Audit'));
 const ManagerOfflineComponent = React.lazy(() => import('../../pages/Manager'));
 const GeneratorOfflineComponent = React.lazy(() =>
   import('../../pages/Generator')
 );
 
-const HistoryComponent: React.FC = () => <div></div>;
 const Footer = styled.div`
   display: flex;
   align-items: center;
@@ -111,15 +111,15 @@ const HeaderNav: React.FC<IHeaderNav> = function({
         </Li>
         <Li className="tab-wrapper">
           <NavLink
-            to="/history"
+            to="/audit"
             replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
-            title="History"
+            title="Audit"
             onClick={clickGenerator}>
-            <i className="material-icons">history</i>
+            <i className="material-icons">security</i>
             <br />
-            History
+            Audit
           </NavLink>
         </Li>
         <Li className="tab-wrapper">
@@ -214,6 +214,15 @@ const GeneratorComponent: React.FC = () => {
   );
 };
 
+const AuditComponent: React.FC = () => {
+  return (
+    <OfflineMode
+      onlineComponent={StopComponent}
+      offlineComponent={AuditOfflineComponent}
+    />
+  );
+};
+
 const InnerDiv = styled.div`
   padding-bottom: 0.75em;
 `;
@@ -267,9 +276,9 @@ const Content: React.FC = () => {
           <ComponentLoader>
             <Switch>
               <Route path="/generator" component={GeneratorComponent} />
+              <Route path="/audit" component={AuditComponent} />
               <Route path="/manager" component={ManagerComponent} />
               <Route path="/about" component={AboutComponent} />
-              <Route path="/history" component={HistoryComponent} />
               <Route render={() => <Redirect to="/generator" />} />
             </Switch>
           </ComponentLoader>

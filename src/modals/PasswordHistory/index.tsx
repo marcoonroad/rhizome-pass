@@ -52,6 +52,11 @@ const RightSpan = styled.span`
   width: 20%;
 `;
 
+const LabelSpan = styled.span`
+  padding: 0.75em;
+  display: inline-block;
+`;
+
 interface IPasswordHistory {
   passwords: string[];
 }
@@ -59,6 +64,7 @@ interface IPasswordHistory {
 const PasswordHistory: React.FC<IPasswordHistory> = props => {
   return (
     <Div>
+      <LabelSpan>Password History</LabelSpan>
       <DivList>
         <ul className="password-history-list">
           {props.passwords.map((password, index) => (

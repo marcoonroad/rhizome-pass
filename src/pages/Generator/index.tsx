@@ -50,6 +50,8 @@ const Form = styled.form`
   width: 80%;
 `;
 
+const {max, min} = Math;
+
 const MainPage: React.FC = () => {
   const usernameId = 'master-username-id';
   const passwordId = 'master-password-id';
@@ -71,8 +73,14 @@ const MainPage: React.FC = () => {
   const serviceRef = React.useRef<HTMLInputElement>(null);
 
   const computePass = (hashImage: string) => {
+    const passwordLength = Number.parseInt(
+      Storage.get('settings-password-length') || '12',
+      10
+    );
+    const length = max(4, min(passwordLength, 32));
+
     return Crypto.asPassword(hashImage, {
-      length: 12,
+      length,
       digit: !Storage.get('settings-no-digit-char'),
       upper: !Storage.get('settings-no-upper-char'),
       lower: true,

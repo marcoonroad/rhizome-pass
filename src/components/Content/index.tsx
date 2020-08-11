@@ -12,10 +12,10 @@ import {
 import Header from '../Header';
 import OfflineMode from '../../functors/OfflineMode';
 import ComponentLoader from '../../components/ComponentLoader';
-import stopIcon from '../../assets/images/stop.png';
+import stopIcon from '../../assets/images/stop.jpg';
 
 const AboutComponent = React.lazy(() => import('../../pages/About'));
-const AuditOfflineComponent = React.lazy(() => import('../../pages/Audit'));
+// const AuditOfflineComponent = React.lazy(() => import('../../pages/Audit'));
 const ManagerOfflineComponent = React.lazy(() => import('../../pages/Manager'));
 const GeneratorOfflineComponent = React.lazy(() =>
   import('../../pages/Generator')
@@ -109,6 +109,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             Generator
           </NavLink>
         </Li>
+        {/*
         <Li className="tab-wrapper">
           <NavLink
             to="/audit"
@@ -122,6 +123,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             Audit
           </NavLink>
         </Li>
+        */}
         <Li className="tab-wrapper">
           <NavLink
             to="/manager"
@@ -214,6 +216,7 @@ const GeneratorComponent: React.FC = () => {
   );
 };
 
+/*
 const AuditComponent: React.FC = () => {
   return (
     <OfflineMode
@@ -222,6 +225,7 @@ const AuditComponent: React.FC = () => {
     />
   );
 };
+*/
 
 const InnerDiv = styled.div`
   padding-bottom: 0.75em;
@@ -276,7 +280,9 @@ const Content: React.FC = () => {
           <ComponentLoader>
             <Switch>
               <Route path="/generator" component={GeneratorComponent} />
+              {/*
               <Route path="/audit" component={AuditComponent} />
+              */}
               <Route path="/manager" component={ManagerComponent} />
               <Route path="/about" component={AboutComponent} />
               <Route render={() => <Redirect to="/generator" />} />

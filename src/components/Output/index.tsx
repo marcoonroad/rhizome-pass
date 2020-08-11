@@ -15,18 +15,6 @@ const DefaultButton = styled.button`
   border-radius: 5px;
 `;
 
-const DefaultOutput = styled.input`
-  background-color: white;
-  border: none;
-  color: #4caf50;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
-`;
-
 const Span = styled.span`
   color: black;
   font-family: 'Inconsolata', monospace;
@@ -50,8 +38,21 @@ const Button = styled(DefaultButton)`
   display: block;
 `;
 
-const StyledOutput = styled(DefaultOutput)`
+const StyledOutput = styled.div`
+  background-color: white;
+  border: none;
+  color: #4caf50;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  overflow: hidden;
   border-radius: 5px 0px 0px 5px;
+  border-color: #4caf50;
+  border-style: solid;
+  border-width: 2px;
   width: 75%;
   display: block;
 `;
@@ -104,7 +105,9 @@ const Output: React.FC<IOutput> = ({value, className, label, labelId}) => {
         />
       </Span>
       <div className={'horizontal-stack'}>
-        <StyledOutput id={labelId} readOnly disabled={disabled} value={value} />
+        <StyledOutput>
+          <div className="autoscroll-animated-text">{value}</div>
+        </StyledOutput>
         <Button type="button" disabled={disabled} onClick={copyContent}>
           <i className="material-icons">file_copy</i>
         </Button>

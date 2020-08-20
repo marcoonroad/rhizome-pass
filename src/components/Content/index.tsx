@@ -81,6 +81,8 @@ interface IHeaderNav {
   mockBottomPadding?: boolean;
 }
 
+const EmptyDiv = (props: any) => <div></div>;
+
 const HeaderNav: React.FC<IHeaderNav> = function({
   disabled,
   clickGenerator,
@@ -91,7 +93,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
   const disabledClass = disabled || mockBottomPadding ? 'disabled-link' : '';
 
   const NavDiv = mockBottomPadding ? RelativeNavDiv : AbsoluteNavDiv;
-  const NavLink = mockBottomPadding ? styled.div`` : RealNavLink;
+  const NavLink = mockBottomPadding ? EmptyDiv : RealNavLink;
 
   return (
     <NavDiv>

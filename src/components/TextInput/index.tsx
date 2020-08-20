@@ -54,7 +54,7 @@ const Div = styled.div`
 `;
 
 const exists = (value: any) => {
-  return value !== null && value !== undefined && value !== '' && value !== 0;
+  return value !== null && value !== undefined && value !== 0;
 };
 
 interface ITextInput {

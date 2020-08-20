@@ -11,14 +11,16 @@ import {
 
 import Header from '../Header';
 import OfflineMode from '../../functors/OfflineMode';
+import ComponentLoader from '../../components/ComponentLoader';
+import stopIcon from '../../assets/images/stop.jpg';
 
-import AboutComponent from '../../pages/About';
-import ManagerOfflineComponent from '../../pages/Manager';
-import GeneratorOfflineComponent from '../../pages/Generator';
+const AboutComponent = React.lazy(() => import('../../pages/About'));
+// const AuditOfflineComponent = React.lazy(() => import('../../pages/Audit'));
+const ManagerOfflineComponent = React.lazy(() => import('../../pages/Manager'));
+const GeneratorOfflineComponent = React.lazy(() =>
+  import('../../pages/Generator')
+);
 
-import stopIcon from '../../assets/images/stop.png';
-
-const HistoryComponent: React.FC = () => <div></div>;
 const Footer = styled.div`
   display: flex;
   align-items: center;
@@ -97,6 +99,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
         <Li className="tab-wrapper">
           <NavLink
             to="/generator"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
             title="Generator"
@@ -106,21 +109,25 @@ const HeaderNav: React.FC<IHeaderNav> = function({
             Generator
           </NavLink>
         </Li>
+        {/*
         <Li className="tab-wrapper">
           <NavLink
-            to="/history"
+            to="/audit"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
-            title="History"
+            title="Audit"
             onClick={clickGenerator}>
-            <i className="material-icons">history</i>
+            <i className="material-icons">security</i>
             <br />
-            History
+            Audit
           </NavLink>
         </Li>
+        */}
         <Li className="tab-wrapper">
           <NavLink
             to="/manager"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
             title="Manager"
@@ -133,6 +140,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
         <Li className="tab-wrapper">
           <NavLink
             to="/about"
+            replace
             className={`tab-selector ${disabledClass}`}
             activeClassName="tab-selector-active"
             title="About"
@@ -208,6 +216,17 @@ const GeneratorComponent: React.FC = () => {
   );
 };
 
+/*
+const AuditComponent: React.FC = () => {
+  return (
+    <OfflineMode
+      onlineComponent={StopComponent}
+      offlineComponent={AuditOfflineComponent}
+    />
+  );
+};
+*/
+
 const InnerDiv = styled.div`
   padding-bottom: 0.75em;
 `;
@@ -258,13 +277,17 @@ const Content: React.FC = () => {
             clickManager={showFooter}
             clickAbout={showFooter}
           />
-          <Switch>
-            <Route path="/generator" component={GeneratorComponent} />
-            <Route path="/manager" component={ManagerComponent} />
-            <Route path="/about" component={AboutComponent} />
-            <Route path="/history" component={HistoryComponent} />
-            <Route render={() => <Redirect to="/generator" />} />
-          </Switch>
+          <ComponentLoader>
+            <Switch>
+              <Route path="/generator" component={GeneratorComponent} />
+              {/*
+              <Route path="/audit" component={AuditComponent} />
+              */}
+              <Route path="/manager" component={ManagerComponent} />
+              <Route path="/about" component={AboutComponent} />
+              <Route render={() => <Redirect to="/generator" />} />
+            </Switch>
+          </ComponentLoader>
         </InnerDiv>
 
         <FooterComponent online={current.online} />

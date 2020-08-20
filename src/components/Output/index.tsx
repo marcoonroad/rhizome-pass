@@ -62,9 +62,16 @@ interface IOutput {
   className: string;
   label: string;
   labelId: string;
+  revealPassword: boolean;
 }
 
-const Output: React.FC<IOutput> = ({value, className, label, labelId}) => {
+const Output: React.FC<IOutput> = ({
+  value,
+  className,
+  label,
+  labelId,
+  revealPassword,
+}) => {
   const [state, setState] = React.useState({
     copyStatus: false,
   });
@@ -93,6 +100,7 @@ const Output: React.FC<IOutput> = ({value, className, label, labelId}) => {
   };
 
   const disabled = !value;
+  const output = revealPassword ? value : '*'.repeat(value.length);
 
   return (
     <div className={`${className}`}>
@@ -106,7 +114,7 @@ const Output: React.FC<IOutput> = ({value, className, label, labelId}) => {
       </Span>
       <div className={'horizontal-stack'}>
         <StyledOutput>
-          <div className="autoscroll-animated-text">{value}</div>
+          <div className="autoscroll-animated-text">{output}</div>
         </StyledOutput>
         <Button type="button" disabled={disabled} onClick={copyContent}>
           <i className="material-icons">file_copy</i>
@@ -116,6 +124,4 @@ const Output: React.FC<IOutput> = ({value, className, label, labelId}) => {
   );
 };
 
-const PublicOutput = styled(Output)``;
-
-export default React.memo(PublicOutput);
+export default Output;

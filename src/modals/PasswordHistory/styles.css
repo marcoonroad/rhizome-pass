@@ -17,11 +17,19 @@ li.password-history-entry {
   border-bottom-width: 1px;
   border-bottom-color: black;
   border-bottom-style: solid;
-  padding: 1em;
 }
 
 li.password-history-entry:last-child {
   border-bottom-width: 0px;
+}
+
+li button.password-history-button {
+  padding: 1em;
+}
+
+li button.selected-password-history-button {
+  background-color: #282c34 !important;
+  color: white !important;
 }
 
 /*

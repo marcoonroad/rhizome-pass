@@ -22,6 +22,10 @@ const Button = styled(DefaultButton)`
   margin-right: 5px;
 `;
 
+const RevealButton = styled(Button)`
+  background-color: #282c34;
+`;
+
 const CloseButton = styled(Button)`
   background-color: #af4c50;
 `;
@@ -39,14 +43,37 @@ interface IPasswordOutput {
 }
 
 const PasswordOutput: React.FC<IPasswordOutput> = props => {
+  const [state, setState] = React.useState({
+    revealPassword: false,
+  });
+
+  const togglePassword = () => {
+    setState(current => ({
+      ...current,
+      revealPassword: !current.revealPassword,
+    }));
+  };
+
+  const toggleText = state.revealPassword ? 'HIDE' : 'SHOW';
+  const toggleIcon = state.revealPassword ? 'visibility_off' : 'visibility';
+
   return (
     <Div>
       <Output
         value={props.password}
+        revealPassword={state.revealPassword}
         labelId={props.outputId}
         label={'Output Password'}
         className={'form-component password-output'}
       />
+      <br />
+      <RevealButton
+        onClick={togglePassword}
+        type="button"
+        disabled={!props.password}
+        className={'form-component'}>
+        {toggleText} <i className="material-icons">{toggleIcon}</i>
+      </RevealButton>
       <br />
       <Button
         onClick={props.refreshPassword}

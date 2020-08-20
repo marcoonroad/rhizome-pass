@@ -12,6 +12,16 @@ import * as serviceWorker from './serviceWorker';
 // eslint-disable-next-line
 import _ from './utils/install'; // grabs before install PWA prompt event
 
+import swal from '@sweetalert/with-react';
+import AlertModal from './modals/Alert';
+
+window.alert = function(message: string) {
+  swal({
+    content: <AlertModal message={message} />,
+    buttons: false,
+  });
+};
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

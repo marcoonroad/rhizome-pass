@@ -1,36 +1,40 @@
-import React from 'react'
+import React from 'react';
 
 interface IOfflineMode {
-  onlineComponent : React.FC,
-  offlineComponent : React.FC
+  onlineComponent: React.FC;
+  offlineComponent: React.FC;
 }
 
-const OfflineMode : React.FC<IOfflineMode> = ({ onlineComponent, offlineComponent }) => {
+const OfflineMode: React.FC<IOfflineMode> = ({
+  onlineComponent,
+  offlineComponent,
+}) => {
   const [current, update] = React.useState({
-    online: navigator.onLine
-  })
+    online: process.env.NODE_ENV === 'production' && navigator.onLine,
+  });
 
-  const whenOffline = () => update({ online: false })
-  const whenOnline = () => update({ online: true })
+  const whenOffline = () => update({online: false});
+  const whenOnline = () =>
+    update({online: process.env.NODE_ENV === 'production'});
 
   React.useEffect(() => {
-    window.addEventListener('offline', whenOffline)
-    window.addEventListener('online', whenOnline)
+    window.addEventListener('offline', whenOffline);
+    window.addEventListener('online', whenOnline);
 
     return () => {
-      window.removeEventListener('offline', whenOffline)
-      window.removeEventListener('online', whenOnline)
-    }
-  }, [current.online])
+      window.removeEventListener('offline', whenOffline);
+      window.removeEventListener('online', whenOnline);
+    };
+  }, []);
 
-  const Online = onlineComponent
-  const Offline = offlineComponent
+  const Online = onlineComponent;
+  const Offline = offlineComponent;
 
   if (current.online) {
-    return (<Online />)
+    return <Online />;
   } else {
-    return (<Offline />)
+    return <Offline />;
   }
-}
+};
 
-export default OfflineMode
+export default OfflineMode;

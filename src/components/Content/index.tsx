@@ -6,7 +6,7 @@ import {
   NavLink as RealNavLink,
   Switch,
   Redirect,
-  useLocation,
+  //useLocation,
 } from 'react-router-dom';
 
 import Header from '../Header';
@@ -21,6 +21,7 @@ const GeneratorOfflineComponent = React.lazy(() =>
   import('../../pages/Generator')
 );
 
+/*
 const Footer = styled.div`
   display: flex;
   align-items: center;
@@ -33,11 +34,14 @@ const Footer = styled.div`
   height: 3em;
   display: none;
 `;
+*/
 
+/*
 const FooterContent = styled.div`
   width: 80%;
   display: block;
 `;
+*/
 
 const AbsoluteNavDiv = styled.div`
   width: 100%;
@@ -161,6 +165,7 @@ const HeaderNav: React.FC<IHeaderNav> = function({
   );
 };
 
+/*
 interface IFooter {
   online: boolean;
 }
@@ -180,6 +185,7 @@ const FooterComponent: React.FC<IFooter> = ({online}) => {
     </Footer>
   );
 };
+*/
 
 const StopComponent: React.FC = () => {
   const title = 'STOP NOW!';
@@ -238,23 +244,30 @@ const InnerDiv = styled.div`
 `;
 
 const Content: React.FC = () => {
+  /*
   const [current, update] = React.useState({
     visible: false,
-    online: navigator.onLine,
+    // online: navigator.onLine,
   });
+  */
 
   const showFooter = () => {
+    /*
     update(state => {
       return {...state, visible: true};
     });
+    */
   };
 
   const hideFooter = () => {
+    /*
     update(state => {
       return {...state, visible: false};
     });
+    */
   };
 
+  /*
   const whenOffline = () => {
     update(state => {
       return {...state, online: false};
@@ -271,6 +284,7 @@ const Content: React.FC = () => {
     window.addEventListener('offline', whenOffline);
     window.addEventListener('online', whenOnline);
   }, [current.online]);
+  */
 
   return (
     <div id={'content'}>
@@ -296,7 +310,9 @@ const Content: React.FC = () => {
           </ComponentLoader>
         </InnerDiv>
 
+        {/*
         <FooterComponent online={current.online} />
+        */}
 
         <HeaderNav
           disabled={true}

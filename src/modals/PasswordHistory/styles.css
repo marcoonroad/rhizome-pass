@@ -1,0 +1,38 @@
+ul.password-history-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  min-height: 101%;
+  padding-left: auto;
+  padding-right: auto;
+  border-bottom-width: 0px;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  border-top-width: 0px;
+  border-top-color: black;
+  border-top-style: solid;
+}
+
+li.password-history-entry {
+  border-bottom-width: 1px;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  padding: 1em;
+}
+
+li.password-history-entry:last-child {
+  border-bottom-width: 0px;
+}
+
+/*
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+*/

@@ -1,0 +1,67 @@
+.password-length-range-line {
+  display: flex;
+  flex-direction: row;
+  /*
+  font-size: 1.1em;
+  */
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  width: 100%;
+  vertical-align: middle;
+  align-content: center;
+  align-items: center;
+}
+
+.password-length-range-start,
+.password-length-range-end {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.1em;
+  flex: 2;
+}
+
+.password-length-range-start {
+  text-align: left;
+}
+
+.password-length-range-end {
+  text-align: right;
+}
+
+.password-length-range-input {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.1em;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #282c34;
+  outline: none;
+  opacity: 1;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  flex: 16;
+  height: 0.15em;
+  border-radius: 5px;
+}
+
+.password-length-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.9em;
+  height: 0.9em;
+  background-color: #4caf50;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.password-length-range-input::-moz-range-thumb {
+  width: 0.9em;
+  height: 0.9em;
+  background-color: #4caf50;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.password-length-range-title {
+  font-size: 1.1em;
+}

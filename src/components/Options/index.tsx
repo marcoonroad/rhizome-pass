@@ -69,7 +69,7 @@ const asOption = (value: string) => (
 );
 
 const exists = (value: any) => {
-  return value !== null && value !== undefined && value !== '' && value !== 0;
+  return value !== null && value !== undefined && value !== 0;
 };
 
 const Options: React.FC<IOptions> = ({

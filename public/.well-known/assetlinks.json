@@ -8,5 +8,15 @@
         "6C:F8:BD:58:71:45:2C:91:37:EF:88:8B:5B:E9:ED:23:C7:22:F5:BB:AD:82:25:C3:DC:95:AE:68:C6:2A:E1:24"
       ]
     }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.marcoonroad.rhizomepassdev",
+      "sha256_cert_fingerprints": [
+        "25:D0:F4:6D:88:F2:50:FE:00:53:AF:4C:3B:A7:68:65:EE:49:90:62:B0:D2:F6:6B:3C:73:72:80:00:11:7B:6D"
+      ]
+    }
   }
 ]

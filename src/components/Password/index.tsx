@@ -9,7 +9,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -21,13 +21,13 @@ const DefaultInput = styled.input`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
 const DefaultLabel = styled.label`
   color: black;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   display: inline-block;
   padding: 0.75em;
 
@@ -139,7 +139,9 @@ const Password: React.FC<IPassword> = initialPassword => {
             onBlur={disallowEdit}
           />
         </Div>
-        <Button onClick={toggleVisibility}>{buttonText}</Button>
+        <Button onClick={toggleVisibility} type="button">
+          {buttonText}
+        </Button>
       </div>
     </div>
   );

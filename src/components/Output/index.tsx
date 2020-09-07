@@ -11,13 +11,13 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
 const Span = styled.span`
   color: black;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   display: flex !important;
   padding: 0.75em;
   text-align: left;
@@ -46,7 +46,7 @@ const StyledOutput = styled.div`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
   overflow: hidden;
   border-radius: 5px 0px 0px 5px;

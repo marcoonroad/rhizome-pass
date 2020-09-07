@@ -9,7 +9,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -45,7 +45,10 @@ const Alert: React.FC<IAlert> = props => {
       <Span>{props.message}</Span>
       <br />
       <CloseButton
-        onClick={() => swal.close()}
+        onClick={event => {
+          event.preventDefault();
+          swal.close();
+        }}
         type="button"
         className={'form-component'}>
         CLOSE <i className="material-icons">close</i>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledHeader = styled.h1`
   color: white;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   font-size: 2em;
   text-align: center;
   font-weight: bold;
@@ -23,7 +23,7 @@ const Div = styled.div`
 
 const StyledSubtitle = styled.h2`
   color: white;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   font-size: 1.1em;
   text-align: center;
   font-style: italic;

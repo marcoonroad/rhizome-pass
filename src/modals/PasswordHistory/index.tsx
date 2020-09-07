@@ -11,7 +11,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -113,7 +113,8 @@ const PasswordHistory: React.FC<IPasswordHistory> = props => {
     }));
   };
 
-  const togglePasswords = () => {
+  const togglePasswords = (event: any) => {
+    event.preventDefault();
     setState(current => ({
       ...current,
       revealPasswords: !current.revealPasswords,
@@ -139,7 +140,10 @@ const PasswordHistory: React.FC<IPasswordHistory> = props => {
           {props.passwords.map((password, index) => (
             <li key={password} className="password-history-entry">
               <ItemButton
-                onClick={event => copyContent(event, password)}
+                onClick={event => {
+                  copyContent(event, password);
+                }}
+                type="button"
                 className={`password-history-button ${
                   state.selectedItem === password
                     ? 'selected-password-history-button'
@@ -166,7 +170,10 @@ const PasswordHistory: React.FC<IPasswordHistory> = props => {
       </RevealButton>
       <br />
       <CloseButton
-        onClick={() => swal.close()}
+        onClick={event => {
+          event.preventDefault();
+          swal.close();
+        }}
         type="button"
         className={'form-component'}>
         CLOSE <i className="material-icons">close</i>

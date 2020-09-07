@@ -13,7 +13,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -120,7 +120,10 @@ const ManagerComponent: React.FC = () => {
             show={current.importStatus}
           />
         </span>
-        <Button onClick={importBlacklist} className={'form-component'}>
+        <Button
+          onClick={importBlacklist}
+          className={'form-component'}
+          type="button">
           IMPORT <i className="material-icons">arrow_downward</i>
         </Button>
       </p>
@@ -141,7 +144,10 @@ const ManagerComponent: React.FC = () => {
             show={current.exportStatus}
           />
         </span>
-        <Button onClick={exportBlacklist} className={'form-component'}>
+        <Button
+          onClick={exportBlacklist}
+          className={'form-component'}
+          type="button">
           EXPORT <i className="material-icons">arrow_upward</i>
         </Button>
       </p>

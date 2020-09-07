@@ -11,7 +11,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -47,7 +47,8 @@ const PasswordOutput: React.FC<IPasswordOutput> = props => {
     revealPassword: false,
   });
 
-  const togglePassword = () => {
+  const togglePassword = (event: any) => {
+    event.preventDefault();
     setState(current => ({
       ...current,
       revealPassword: !current.revealPassword,
@@ -76,7 +77,10 @@ const PasswordOutput: React.FC<IPasswordOutput> = props => {
       </RevealButton>
       <br />
       <Button
-        onClick={props.refreshPassword}
+        onClick={event => {
+          event.preventDefault();
+          props.refreshPassword(event);
+        }}
         type="button"
         disabled={!props.password}
         className={'form-component'}>
@@ -84,7 +88,10 @@ const PasswordOutput: React.FC<IPasswordOutput> = props => {
       </Button>
       <br />
       <CloseButton
-        onClick={() => swal.close()}
+        onClick={event => {
+          event.preventDefault();
+          swal.close();
+        }}
         type="button"
         className={'form-component'}>
         CLOSE <i className="material-icons">close</i>

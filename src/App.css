@@ -35,7 +35,7 @@
 }
 
 .monospace {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
 }
 */
 
@@ -63,7 +63,7 @@ hr.content-line-separator {
 }
 
 input {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
 }
 
 button.form-component {
@@ -84,7 +84,7 @@ button.form-component {
 }
 
 button {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
 }
 
 button:focus,
@@ -116,7 +116,7 @@ span.footer-text {
   color: white;
   padding-right: 2em;
   text-align: right;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   /*
   margin-top: auto;
   margin-bottom: auto;
@@ -127,7 +127,7 @@ span.footer-text {
 
 .tab-selector {
   text-decoration: none;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   color: white;
   display: block;
   width: auto;
@@ -141,7 +141,7 @@ span.footer-text {
 
 .tab-selector-active {
   text-decoration: none;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   color: white;
   display: block;
   width: auto;
@@ -158,7 +158,7 @@ span.footer-text {
 
 .about-container {
   color: black;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   width: 80%;
   margin: 0 auto;
   padding-top: 25px !important;
@@ -257,12 +257,12 @@ span.footer-text {
 
 /*
 body * {
-  font-family: 'Inconsolata', monospace !important;
+  font-family: 'Ubuntu Mono', monospace !important;
   font-variant: small-caps !important;
 }
 
 body > * {
-  font-family: 'Inconsolata', monospace !important;
+  font-family: 'Ubuntu Mono', monospace !important;
   font-variant: small-caps !important;
 }
 */

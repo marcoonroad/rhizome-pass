@@ -13,7 +13,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -129,11 +129,12 @@ const AboutPage: React.FC = () => {
       <Button
         onClick={install}
         className={'form-component'}
+        type="button"
         disabled={current.installed || !current.installable}>
         INSTALL <i className="material-icons">get_app</i>
       </Button>
 
-      <Button onClick={shareApp} className={'form-component'}>
+      <Button onClick={shareApp} className={'form-component'} type="button">
         SHARE <i className="material-icons">share</i>
       </Button>
     </div>

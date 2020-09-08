@@ -35,7 +35,7 @@ const lines = [
   'password generator uses cryptographic primitives such as',
   "HMAC, hashes, KDF and PRNG. We don't store anything except",
   'for hash images of refreshed generated passwords. This',
-  'project is hosted at: ',
+  'project is hosted on a public GitHub repository: ',
 ];
 
 const fullText = lines.join(' ');
@@ -100,7 +100,7 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="about-container">
-      <p>
+      <p className="animated-typing-text">
         {animatedText}
         <span
           className={
@@ -111,18 +111,18 @@ const AboutPage: React.FC = () => {
           {suffix}
         </span>
         <span className="about-invisible-text-hack">{invisibleText}</span>
-        <br />
-        <br />
-
+      </p>
+      <p>
         <span>
           <i className="material-icons">link</i>{' '}
           <a
             href="https://github.com/marcoonroad/rhizome-pass"
             className="text-link"
-            title="Rhizome Pass repository">
-            github.com/marcoonroad/rhizome-pass
+            title="Rhizome Pass' source code">
+            Rhizome Pass' source code
           </a>
         </span>
+        <br />
         <br />
       </p>
 

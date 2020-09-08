@@ -167,6 +167,9 @@ span.footer-text {
 .about-container p {
   padding: 0.75em 0.75em;
   display: block;
+}
+
+.about-container p.animated-typing-text {
   transition: 0.5s;
   text-align: justify;
 }
@@ -248,7 +251,7 @@ span.footer-text {
 
 .text-link {
   color: black;
-  font-size: 0.85em;
+  font-size: 1em;
 }
 
 .invisible {

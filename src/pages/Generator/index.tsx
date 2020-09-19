@@ -96,16 +96,32 @@ const MainPage: React.FC = () => {
     console.log('Trying the HMAC nonce: ' + nonce);
     let hashImage = await Crypto.hmac('SHA-512', nonce.toString(), derivedKey);
     let hexHashImage = Crypto.asHex(hashImage);
+    let previousHashImage = null as string | null;
+    let previousHexHashImage = null as string | null;
 
+    // checks for end of refreshing context tracking
     while (blacklist[hexHashImage]) {
       nonce += 1;
       console.log('Trying the HMAC nonce: ' + nonce);
+      previousHashImage = hashImage;
+      previousHexHashImage = hexHashImage;
       hashImage = await Crypto.hmac('SHA-512', nonce.toString(), derivedKey);
       hexHashImage = Crypto.asHex(hashImage);
     }
 
-    const newPassword = computePass(hashImage);
+    if (previousHashImage !== null && previousHexHashImage !== null) {
+      // current password nonce context is blacklisted too for better sync
+      nonce -= 1;
+      console.log('Found for the HMAC nonce: ' + nonce);
+      hashImage = previousHashImage;
+      hexHashImage = previousHexHashImage;
+    } else {
+      // new history/nonce tracking for password refreshing context
+      Blacklist.add(hexHashImage);
+      console.log('Tracking HMAC nonce context starting at: ' + nonce);
+    }
 
+    const newPassword = computePass(hashImage);
     return {hashImage, newPassword, nonce, derivedKey};
   };
 
@@ -120,6 +136,7 @@ const MainPage: React.FC = () => {
     let hexHashImage = Crypto.asHex(hashImage);
     const oldPasswords: string[] = [];
 
+    // gather all tracked refreshings except current password nonce context
     while (blacklist[hexHashImage]) {
       oldPasswords.unshift(computePass(hashImage));
       nonce += 1;
@@ -128,7 +145,11 @@ const MainPage: React.FC = () => {
       hexHashImage = Crypto.asHex(hashImage);
     }
 
-    console.log(oldPasswords);
+    oldPasswords.shift(); // removes current password from history/legacy list
+    nonce -= 1;
+    console.log('Found for the HMAC nonce: ' + nonce);
+    hashImage = await Crypto.hmac('SHA-512', nonce.toString(), derivedKey);
+    hexHashImage = Crypto.asHex(hashImage);
 
     return {hashImage, oldPasswords, nonce, derivedKey};
   };
@@ -138,7 +159,6 @@ const MainPage: React.FC = () => {
 
     if (current.hashImage && current.derivedKey) {
       const nonce = current.nonce + 1;
-      const hexHashImage = Crypto.asHex(current.hashImage);
       console.log('Refreshing the new HMAC nonce: ' + nonce);
       const hashImage = await Crypto.hmac(
         'SHA-512',
@@ -146,7 +166,7 @@ const MainPage: React.FC = () => {
         current.derivedKey
       );
       const newPassword = computePass(hashImage);
-
+      const hexHashImage = Crypto.asHex(hashImage); // tracks the new refreshing
       Blacklist.add(hexHashImage);
 
       update({...current, hashImage, password: newPassword, nonce});

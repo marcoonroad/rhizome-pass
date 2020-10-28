@@ -288,7 +288,7 @@ const Content: React.FC = () => {
 
   return (
     <div id={'content'}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Header title={'Rhizome Pass'} subtitle={'Offline Password Manager'} />
         <InnerDiv>
           <HeaderNav

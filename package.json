@@ -61,7 +61,9 @@
     ]
   },
   "resolutions": {
-    "elliptic": "6.5.3"
+    "elliptic": "6.5.3",
+    "handlebars": "4.7.6",
+    "http-proxy": "1.18.1"
   },
   "devDependencies": {
     "@types/jest": "24.0.15",

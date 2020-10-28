@@ -4,13 +4,12 @@
   "private": true,
   "dependencies": {
     "@sweetalert/with-react": "^0.1.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "5.1.2",
-    "react-scripts": "3.0.1",
-    "styled-components": "4.3.2",
-    "sweetalert": "^2.1.2",
-    "typescript": "3.5.2"
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-is": "^16.8",
+    "react-router-dom": "5.2.0",
+    "styled-components": "^5.0.0",
+    "sweetalert": "^2.1.2"
   },
   "repository": {
     "type": "git",
@@ -23,7 +22,7 @@
     "predeploy": "yarn run build && mv build/index.html build/200.html",
     "deploy": "surge --project ./build --domain https://rhizome-pass.surge.sh",
     "predeploy:prod": "yarn run build",
-    "deploy:prod": "gh-pages -b gh-pages -d ./build",
+    "deploy:prod": "gh-pages -t -b gh-pages -d ./build",
     "android:off": "adb reverse --remove-all",
     "android:on": "yarn run android:off && adb reverse tcp:4000 tcp:3000",
     "predebug": "yarn run android:on && echo 'Device is listening at http://localhost:4000 address...'",
@@ -31,7 +30,9 @@
     "android:open:local": "yarn run android:open http://localhost:4000",
     "android:open:site": "yarn run android:open https://rhizome-pass.surge.sh",
     "debug": "yarn run start",
+    "prestart": "node scripts/optimize-assets.js",
     "start": "react-scripts start",
+    "prebuild": "node scripts/optimize-assets.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -59,17 +60,25 @@
       "last 1 safari version"
     ]
   },
+  "resolutions": {
+    "elliptic": "6.5.3",
+    "handlebars": "4.7.6",
+    "http-proxy": "1.18.1"
+  },
   "devDependencies": {
     "@types/jest": "24.0.15",
     "@types/node": "12.0.8",
     "@types/react": "16.8.21",
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "5.1.2",
-    "@types/styled-components": "4.1.16",
+    "@types/styled-components": "5.1.2",
     "gh-pages": "2.1.1",
     "husky": "3.0.4",
+    "jimp": "^0.16.0",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1",
-    "surge": "0.21.3"
+    "react-scripts": "3.4.3",
+    "surge": "0.21.3",
+    "typescript": "3.9.4"
   }
 }

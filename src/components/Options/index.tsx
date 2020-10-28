@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const DefaultLabel = styled.label`
   color: black;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   display: inline-block;
   padding: 0.75em;
 
@@ -18,7 +18,7 @@ const DefaultInput = styled.input`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px 0px 0px 5px;
 `;
 
@@ -46,7 +46,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -69,7 +69,7 @@ const asOption = (value: string) => (
 );
 
 const exists = (value: any) => {
-  return value !== null && value !== undefined && value !== '' && value !== 0;
+  return value !== null && value !== undefined && value !== 0;
 };
 
 const Options: React.FC<IOptions> = ({

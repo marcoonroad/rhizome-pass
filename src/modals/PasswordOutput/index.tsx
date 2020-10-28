@@ -11,7 +11,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -20,6 +20,10 @@ const Button = styled(DefaultButton)`
   margin: 5px;
   margin-left: 0px;
   margin-right: 5px;
+`;
+
+const RevealButton = styled(Button)`
+  background-color: #282c34;
 `;
 
 const CloseButton = styled(Button)`
@@ -39,17 +43,44 @@ interface IPasswordOutput {
 }
 
 const PasswordOutput: React.FC<IPasswordOutput> = props => {
+  const [state, setState] = React.useState({
+    revealPassword: false,
+  });
+
+  const togglePassword = (event: any) => {
+    event.preventDefault();
+    setState(current => ({
+      ...current,
+      revealPassword: !current.revealPassword,
+    }));
+  };
+
+  const toggleText = state.revealPassword ? 'HIDE' : 'SHOW';
+  const toggleIcon = state.revealPassword ? 'visibility_off' : 'visibility';
+
   return (
     <Div>
       <Output
         value={props.password}
+        revealPassword={state.revealPassword}
         labelId={props.outputId}
         label={'Output Password'}
         className={'form-component password-output'}
       />
       <br />
+      <RevealButton
+        onClick={togglePassword}
+        type="button"
+        disabled={!props.password}
+        className={'form-component'}>
+        {toggleText} <i className="material-icons">{toggleIcon}</i>
+      </RevealButton>
+      <br />
       <Button
-        onClick={props.refreshPassword}
+        onClick={event => {
+          event.preventDefault();
+          props.refreshPassword(event);
+        }}
         type="button"
         disabled={!props.password}
         className={'form-component'}>
@@ -57,7 +88,10 @@ const PasswordOutput: React.FC<IPasswordOutput> = props => {
       </Button>
       <br />
       <CloseButton
-        onClick={() => swal.close()}
+        onClick={event => {
+          event.preventDefault();
+          swal.close();
+        }}
         type="button"
         className={'form-component'}>
         CLOSE <i className="material-icons">close</i>

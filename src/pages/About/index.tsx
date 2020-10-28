@@ -13,7 +13,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -35,7 +35,7 @@ const lines = [
   'password generator uses cryptographic primitives such as',
   "HMAC, hashes, KDF and PRNG. We don't store anything except",
   'for hash images of refreshed generated passwords. This',
-  'project is hosted at: ',
+  'project is hosted on a public GitHub repository: ',
 ];
 
 const fullText = lines.join(' ');
@@ -100,7 +100,7 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="about-container">
-      <p>
+      <p className="animated-typing-text">
         {animatedText}
         <span
           className={
@@ -111,29 +111,30 @@ const AboutPage: React.FC = () => {
           {suffix}
         </span>
         <span className="about-invisible-text-hack">{invisibleText}</span>
-        <br />
-        <br />
-
+      </p>
+      <p>
         <span>
           <i className="material-icons">link</i>{' '}
           <a
             href="https://github.com/marcoonroad/rhizome-pass"
             className="text-link"
-            title="Rhizome Pass repository">
-            github.com/marcoonroad/rhizome-pass
+            title="Rhizome Pass' source code">
+            Rhizome Pass' source code
           </a>
         </span>
+        <br />
         <br />
       </p>
 
       <Button
         onClick={install}
         className={'form-component'}
+        type="button"
         disabled={current.installed || !current.installable}>
         INSTALL <i className="material-icons">get_app</i>
       </Button>
 
-      <Button onClick={shareApp} className={'form-component'}>
+      <Button onClick={shareApp} className={'form-component'} type="button">
         SHARE <i className="material-icons">share</i>
       </Button>
     </div>

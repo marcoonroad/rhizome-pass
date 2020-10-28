@@ -3,6 +3,6 @@
 - [ ] Modal sweet alert pra loading ("é um processo um pouco lento por questões de segurança, aguarde").
 - [ ] Campo pra nome de usuário? Provavelmente sim.
 - [ ] Guardar token pra salting de KDF? Provavelmente não.
-- [ ] Exportar token de salt junto com blacklist de senhas refreshed? Provavelmente só blacklist.
-- [x] Refresh por HMAC-like PRF que blacklisteia nonces já usados por máscaras hash da imagem PRF.
-- [ ] Mecanismo de sincronização de imagens PRF de blacklist?
+- [ ] Exportar token de salt junto com tracklist de senhas refreshed? Provavelmente só tracklist.
+- [x] Refresh por HMAC-like PRF que tracklisteia nonces já usados por máscaras hash da imagem PRF.
+- [ ] Mecanismo de sincronização de imagens PRF de tracklist?

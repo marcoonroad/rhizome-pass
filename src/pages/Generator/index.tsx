@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import swal from '@sweetalert/with-react';
 
 import Crypto from '../../crypto';
-import Blacklist from '../../utils/blacklist';
+import Tracklist from '../../utils/tracklist';
 import Storage from '../../utils/storage';
 import Password from '../../components/Password';
 import TextInput from '../../components/TextInput';
@@ -90,7 +90,7 @@ const MainPage: React.FC = () => {
 
   const computePairs = async (data: string, salt: string, initialNonce = 0) => {
     const derivedKey = await Crypto.pbkdf2(data, salt);
-    const blacklist = Blacklist.get();
+    const tracklist = Tracklist.get();
 
     let nonce = initialNonce;
     console.log('Trying the HMAC nonce: ' + nonce);
@@ -100,7 +100,7 @@ const MainPage: React.FC = () => {
     let previousHexHashImage = null as string | null;
 
     // checks for end of refreshing context tracking
-    while (blacklist[hexHashImage]) {
+    while (tracklist[hexHashImage]) {
       nonce += 1;
       console.log('Trying the HMAC nonce: ' + nonce);
       previousHashImage = hashImage;
@@ -110,14 +110,14 @@ const MainPage: React.FC = () => {
     }
 
     if (previousHashImage !== null && previousHexHashImage !== null) {
-      // current password nonce context is blacklisted too for better sync
+      // current password nonce context is tracklisted too for better sync
       nonce -= 1;
       console.log('Found for the HMAC nonce: ' + nonce);
       hashImage = previousHashImage;
       hexHashImage = previousHexHashImage;
     } else {
       // new history/nonce tracking for password refreshing context
-      Blacklist.add(hexHashImage);
+      Tracklist.add(hexHashImage);
       console.log('Tracking HMAC nonce context starting at: ' + nonce);
     }
 
@@ -128,7 +128,7 @@ const MainPage: React.FC = () => {
   const computeHistory = async (data: string, salt: string) => {
     const initialNonce = 0;
     const derivedKey = await Crypto.pbkdf2(data, salt);
-    const blacklist = Blacklist.get();
+    const tracklist = Tracklist.get();
 
     let nonce = initialNonce;
     console.log('Trying the HMAC nonce: ' + nonce);
@@ -137,7 +137,7 @@ const MainPage: React.FC = () => {
     const oldPasswords: string[] = [];
 
     // gather all tracked refreshings except current password nonce context
-    while (blacklist[hexHashImage]) {
+    while (tracklist[hexHashImage]) {
       oldPasswords.unshift(computePass(hashImage));
       nonce += 1;
       console.log('Trying the HMAC nonce: ' + nonce);
@@ -167,7 +167,7 @@ const MainPage: React.FC = () => {
       );
       const newPassword = computePass(hashImage);
       const hexHashImage = Crypto.asHex(hashImage); // tracks the new refreshing
-      Blacklist.add(hexHashImage);
+      Tracklist.add(hexHashImage);
 
       update({...current, hashImage, password: newPassword, nonce});
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextStatus from '../../components/TextStatus';
-import Blacklist from '../../utils/blacklist';
+import Tracklist from '../../utils/tracklist';
 import Storage from '../../utils/storage';
 import './styles.css';
 
@@ -27,14 +27,14 @@ const aboutImport = [
   'Here you can sync your refreshed passwords',
   'by copying from an external file and then',
   'clicking the button below to paste the',
-  'blacklist hash state inside the application.',
+  'tracklist hash state inside the application.',
 ].join(' ');
 
 const aboutExport = [
   'To backup your refreshed passwords state',
-  'counter through the blacklist hash state,',
+  'counter through the tracklist hash state,',
   'just click on the button below to copy the',
-  'blacklist content and save it on an external',
+  'tracklist content and save it on an external',
   'file.',
 ].join(' ');
 
@@ -80,22 +80,22 @@ const ManagerComponent: React.FC = () => {
     };
   }, [current.importStatus, current.exportStatus]);
 
-  const importBlacklist = async (event: any) => {
+  const importTracklist = async (event: any) => {
     event.preventDefault();
 
-    const addBlacklist = await navigator.clipboard.readText();
-    Blacklist.syncIn(addBlacklist);
+    const addTracklist = await navigator.clipboard.readText();
+    Tracklist.syncIn(addTracklist);
 
     update(current => {
       return {...current, importStatus: true, exportStatus: false};
     });
   };
 
-  const exportBlacklist = async (event: any) => {
+  const exportTracklist = async (event: any) => {
     event.preventDefault();
 
-    const blacklist = Blacklist.syncOut();
-    await navigator.clipboard.writeText(blacklist);
+    const tracklist = Tracklist.syncOut();
+    await navigator.clipboard.writeText(tracklist);
 
     update(current => {
       return {...current, importStatus: false, exportStatus: true};
@@ -107,7 +107,7 @@ const ManagerComponent: React.FC = () => {
       <p>
         <span className="horizontal-flex-stack">
           <span className="manager-action-label">
-            Import Blacklist
+            Import Tracklist
             <i
               className="material-icons manager-help-icon"
               onClick={() => alert(aboutImport)}>
@@ -121,7 +121,7 @@ const ManagerComponent: React.FC = () => {
           />
         </span>
         <Button
-          onClick={importBlacklist}
+          onClick={importTracklist}
           className={'form-component'}
           type="button">
           IMPORT <i className="material-icons">arrow_downward</i>
@@ -131,7 +131,7 @@ const ManagerComponent: React.FC = () => {
       <p>
         <span className="horizontal-flex-stack">
           <span className="manager-action-label">
-            Export Blacklist
+            Export Tracklist
             <i
               className="material-icons manager-help-icon"
               onClick={() => alert(aboutExport)}>
@@ -145,7 +145,7 @@ const ManagerComponent: React.FC = () => {
           />
         </span>
         <Button
-          onClick={exportBlacklist}
+          onClick={exportTracklist}
           className={'form-component'}
           type="button">
           EXPORT <i className="material-icons">arrow_upward</i>

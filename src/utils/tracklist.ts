@@ -58,4 +58,28 @@ const syncOut = () => {
   return hashImages.join('\n');
 };
 
-export default {add, get, syncIn, syncOut};
+const downloadAsFile = () => {
+  const fileName = 'rhizome-tracklist.txt';
+  const fileData = syncOut();
+  const blob = new Blob([fileData], {type: 'plain/text'});
+  const navigatorObject: any = window.navigator;
+  if (navigatorObject.msSaveOrOpenBlob) {
+    navigatorObject.msSaveBlob(blob, fileName);
+  }
+  else {
+    const elem = window.document.createElement('a');
+    elem.id = 'download';
+    // const url = "data:text/plain;charset=utf-8," + encodeURIComponent(fileData);
+    const url = window.URL.createObjectURL(blob);
+    elem.style.display = 'none';
+    elem.href = url;
+    elem.download = fileName;        
+    document.body.appendChild(elem);
+    elem.click();        
+    window.URL.revokeObjectURL(elem.href);
+    elem.href = '';
+    document.body.removeChild(elem);
+  }
+};
+
+export default {add, get, syncIn, syncOut, downloadAsFile};

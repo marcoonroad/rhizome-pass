@@ -38,12 +38,21 @@ const aboutExport = [
   'file.',
 ].join(' ');
 
+const aboutDownload = [
+  'Akin to export operation, but instead of',
+  'adding tracklist on clipboard area for further',
+  'paste anywhere, a plain-text file called',
+  'rhizome-tracklist.txt is created for download',
+  'here.'
+].join(' ');
+
 const {max, min} = Math;
 
 const ManagerComponent: React.FC = () => {
   const [current, update] = React.useState({
     importStatus: false,
     exportStatus: false,
+    downloadStatus: false,
     withDigit: false,
     withUpper: false,
     withSpecial: false,
@@ -71,14 +80,14 @@ const ManagerComponent: React.FC = () => {
   React.useEffect(() => {
     const timeoutHandler = setTimeout(() => {
       update(current => {
-        return {...current, importStatus: false, exportStatus: false};
+        return {...current, importStatus: false, exportStatus: false, downloadStatus: false};
       });
     }, 2000);
 
     return () => {
       clearTimeout(timeoutHandler);
     };
-  }, [current.importStatus, current.exportStatus]);
+  }, [current.importStatus, current.exportStatus, current.downloadStatus]);
 
   const importTracklist = async (event: any) => {
     event.preventDefault();
@@ -87,7 +96,15 @@ const ManagerComponent: React.FC = () => {
     Tracklist.syncIn(addTracklist);
 
     update(current => {
-      return {...current, importStatus: true, exportStatus: false};
+      return {...current, importStatus: true, exportStatus: false, downloadStatus: false};
+    });
+  };
+
+  const downloadTracklist = async (event: any) => {
+    event.preventDefault();
+    Tracklist.downloadAsFile();
+    update(current => {
+      return {...current, downloadStatus: true, importStatus: false, exportStatus: false};
     });
   };
 
@@ -98,7 +115,7 @@ const ManagerComponent: React.FC = () => {
     await navigator.clipboard.writeText(tracklist);
 
     update(current => {
-      return {...current, importStatus: false, exportStatus: true};
+      return {...current, importStatus: false, exportStatus: true, downloadStatus: false};
     });
   };
 
@@ -149,6 +166,30 @@ const ManagerComponent: React.FC = () => {
           className={'form-component'}
           type="button">
           EXPORT <i className="material-icons">arrow_upward</i>
+        </Button>
+      </p>
+
+      <p>
+        <span className="horizontal-flex-stack">
+          <span className="manager-action-label">
+            Download Tracklist
+            <i
+              className="material-icons manager-help-icon"
+              onClick={() => alert(aboutDownload)}>
+              help
+            </i>
+          </span>
+          <TextStatus
+            label="SUCCESS!"
+            className="manager-text-status"
+            show={current.downloadStatus}
+          />
+        </span>
+        <Button
+          onClick={downloadTracklist}
+          className={'form-component'}
+          type="button">
+          DOWNLOAD <i className="material-icons">download</i>
         </Button>
       </p>
 

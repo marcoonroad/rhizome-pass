@@ -65,20 +65,21 @@ const downloadAsFile = () => {
   const navigatorObject: any = window.navigator;
   if (navigatorObject.msSaveOrOpenBlob) {
     navigatorObject.msSaveBlob(blob, fileName);
-  }
-  else {
+  } else {
     const elem = window.document.createElement('a');
     elem.id = 'download';
     // const url = "data:text/plain;charset=utf-8," + encodeURIComponent(fileData);
     const url = window.URL.createObjectURL(blob);
     elem.style.display = 'none';
     elem.href = url;
-    elem.download = fileName;        
+    elem.download = fileName;
     document.body.appendChild(elem);
-    elem.click();        
-    window.URL.revokeObjectURL(elem.href);
-    elem.href = '';
-    document.body.removeChild(elem);
+    elem.click();
+    setTimeout(() => {
+      window.URL.revokeObjectURL(elem.href);
+      elem.href = '';
+      document.body.removeChild(elem);
+    }, 1);
   }
 };
 

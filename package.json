@@ -20,17 +20,17 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "predeploy": "yarn run build && mv build/index.html build/200.html",
+    "predeploy": "npm run build && mv build/index.html build/200.html",
     "deploy": "surge --project ./build --domain https://rhizome-pass.surge.sh",
-    "predeploy:prod": "yarn run build",
+    "predeploy:prod": "npm run build",
     "deploy:prod": "gh-pages -t -b gh-pages -d ./build",
     "android:off": "adb reverse --remove-all",
-    "android:on": "yarn run android:off && adb reverse tcp:4000 tcp:3000",
-    "predebug": "yarn run android:on && echo 'Device is listening at http://localhost:4000 address...'",
+    "android:on": "npm run android:off && adb reverse tcp:4000 tcp:3000",
+    "predebug": "npm run android:on && echo 'Device is listening at http://localhost:4000 address...'",
     "android:open": "adb shell am start -a android.intent.action.VIEW -d",
-    "android:open:local": "yarn run android:open http://localhost:4000",
-    "android:open:site": "yarn run android:open https://rhizome-pass.surge.sh",
-    "debug": "yarn run start",
+    "android:open:local": "npm run android:open http://localhost:4000",
+    "android:open:site": "npm run android:open https://rhizome-pass.surge.sh",
+    "debug": "npm run start",
     "prestart": "node scripts/optimize-assets.js",
     "start": "react-scripts start",
     "prebuild": "node scripts/optimize-assets.js",
@@ -45,8 +45,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run hooks:pre-commit",
-      "pre-push": "yarn run hooks:pre-push"
+      "pre-commit": "npm run hooks:pre-commit",
+      "pre-push": "npm run hooks:pre-push"
     }
   },
   "browserslist": {

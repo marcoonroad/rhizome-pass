@@ -1,4 +1,5 @@
 import React from 'react';
+import * as process from 'process';
 
 interface IOfflineMode {
   onlineComponent: React.FC;

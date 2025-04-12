@@ -8,6 +8,7 @@ import './index.css';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import * as process from 'process';
 
 // eslint-disable-next-line
 import _ from './utils/install'; // grabs before install PWA prompt event

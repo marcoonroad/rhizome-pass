@@ -79,7 +79,7 @@
     "eventemitter3": "^5.0.1",
     "gh-pages": "2.1.1",
     "husky": "3.0.4",
-    "jimp": "^0.16.0",
+    "jimp": "^1.6.0",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1",
     "react-scripts": "3.4.3",

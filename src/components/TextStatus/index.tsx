@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Span = styled.span`
+const TextSpan = styled.span`
   transition: 0.5s;
 `;
+
 interface ITextStatus {
   show: boolean;
   className: string;
@@ -12,9 +13,9 @@ interface ITextStatus {
 
 const TextStatus: React.FC<ITextStatus> = ({show, className, label}) => {
   return (
-    <Span className={className + (show ? '' : ' invisible')}>
+    <TextSpan className={className + (show ? '' : ' invisible')}>
       {label} <i className="material-icons">check_circle</i>
-    </Span>
+    </TextSpan>
   );
 };
 

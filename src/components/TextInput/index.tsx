@@ -9,13 +9,13 @@ const DefaultInput = styled.input`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
 const DefaultLabel = styled.label`
   color: black;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Ubuntu Mono', monospace;
   display: inline-block;
   padding: 0.75em;
 
@@ -38,7 +38,7 @@ const DefaultButton = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1em;
   border-radius: 5px;
 `;
 
@@ -54,7 +54,7 @@ const Div = styled.div`
 `;
 
 const exists = (value: any) => {
-  return value !== null && value !== undefined && value !== '' && value !== 0;
+  return value !== null && value !== undefined && value !== 0;
 };
 
 interface ITextInput {

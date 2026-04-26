@@ -1,8 +1,15 @@
-navigator.storage.persisted().then(async persisted => {
-  if (!persisted) {
-    await navigator.storage.persist();
-  }
-});
+if (
+  typeof navigator !== 'undefined' &&
+  !!navigator &&
+  typeof navigator.storage !== 'undefined' &&
+  !!navigator.storage
+) {
+  navigator.storage.persisted().then(async persisted => {
+    if (!persisted) {
+      await navigator.storage.persist();
+    }
+  });
+}
 
 const PREFIX = 'rhizome-pass-';
 const storage = localStorage;

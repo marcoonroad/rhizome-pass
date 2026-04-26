@@ -43,7 +43,7 @@ const aboutDownload = [
   'adding tracklist on clipboard area for further',
   'paste anywhere, a plain-text file called',
   'rhizome-tracklist.txt is created for download',
-  'here.'
+  'here.',
 ].join(' ');
 
 const {max, min} = Math;
@@ -80,7 +80,12 @@ const ManagerComponent: React.FC = () => {
   React.useEffect(() => {
     const timeoutHandler = setTimeout(() => {
       update(current => {
-        return {...current, importStatus: false, exportStatus: false, downloadStatus: false};
+        return {
+          ...current,
+          importStatus: false,
+          exportStatus: false,
+          downloadStatus: false,
+        };
       });
     }, 2000);
 
@@ -92,31 +97,54 @@ const ManagerComponent: React.FC = () => {
   const importTracklist = async (event: any) => {
     event.preventDefault();
 
-    const addTracklist = await navigator.clipboard.readText();
-    Tracklist.syncIn(addTracklist);
+    try {
+      const addTracklist = await navigator.clipboard.readText();
+      Tracklist.syncIn(addTracklist);
 
-    update(current => {
-      return {...current, importStatus: true, exportStatus: false, downloadStatus: false};
-    });
+      update(current => {
+        return {
+          ...current,
+          importStatus: true,
+          exportStatus: false,
+          downloadStatus: false,
+        };
+      });
+    } catch (reason) {
+      console.error('Failed to import tracklist: ' + reason);
+    }
   };
 
   const downloadTracklist = async (event: any) => {
     event.preventDefault();
     Tracklist.downloadAsFile();
     update(current => {
-      return {...current, downloadStatus: true, importStatus: false, exportStatus: false};
+      return {
+        ...current,
+        downloadStatus: true,
+        importStatus: false,
+        exportStatus: false,
+      };
     });
   };
 
   const exportTracklist = async (event: any) => {
     event.preventDefault();
 
-    const tracklist = Tracklist.syncOut();
-    await navigator.clipboard.writeText(tracklist);
+    try {
+      const tracklist = Tracklist.syncOut();
+      await navigator.clipboard.writeText(tracklist);
 
-    update(current => {
-      return {...current, importStatus: false, exportStatus: true, downloadStatus: false};
-    });
+      update(current => {
+        return {
+          ...current,
+          importStatus: false,
+          exportStatus: true,
+          downloadStatus: false,
+        };
+      });
+    } catch (reason) {
+      console.error('Failed to export tracklist: ' + reason);
+    }
   };
 
   return (

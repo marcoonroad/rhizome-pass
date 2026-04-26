@@ -89,14 +89,18 @@ const Output: React.FC<IOutput> = ({
     };
   }, [state.copyStatus]);
 
-  const copyContent = (event: any) => {
+  const copyContent = async (event: any) => {
     event.preventDefault();
 
-    navigator.clipboard.writeText(value);
-    setState(current => ({
-      ...current,
-      copyStatus: true,
-    }));
+    try {
+      await navigator.clipboard.writeText(value);
+      setState(current => ({
+        ...current,
+        copyStatus: true,
+      }));
+    } catch (reason) {
+      console.error('Failed to copy content: ' + reason);
+    }
   };
 
   const disabled = !value;

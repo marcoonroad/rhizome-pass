@@ -102,15 +102,19 @@ const PasswordHistory: React.FC<IPasswordHistory> = props => {
     };
   }, [state.copyStatus]);
 
-  const copyContent = (event: any, value: string) => {
+  const copyContent = async (event: any, value: string) => {
     event.preventDefault();
 
-    navigator.clipboard.writeText(value);
-    setState(current => ({
-      ...current,
-      copyStatus: true,
-      selectedItem: value,
-    }));
+    try {
+      await navigator.clipboard.writeText(value);
+      setState(current => ({
+        ...current,
+        copyStatus: true,
+        selectedItem: value,
+      }));
+    } catch (reason) {
+      console.error('Failed to copy content: ' + reason);
+    }
   };
 
   const togglePasswords = (event: any) => {

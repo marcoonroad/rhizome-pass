@@ -49,18 +49,24 @@ const AboutPage: React.FC = () => {
   });
 
   React.useEffect(() => {
-    Install.before().then(() => {
-      update(state => {
-        return {...state, installable: true};
-      });
-    });
+    Install.before()
+      .then(() => {
+        update(state => {
+          return {...state, installable: true};
+        });
+      })
+      .catch(console.error);
 
-    Install.after().then(() => {
-      update(state => {
-        return {...state, installed: true};
-      });
-    });
+    Install.after()
+      .then(() => {
+        update(state => {
+          return {...state, installed: true};
+        });
+      })
+      .catch(console.error);
+  }, [current.installed, current.installable]);
 
+  React.useEffect(() => {
     if (current.counter === fullText.length) {
       return;
 
@@ -84,7 +90,7 @@ const AboutPage: React.FC = () => {
     }, 70);
 
     return () => clearTimeout(timeout);
-  }, [current.counter, current.blink, current.installed, current.installable]);
+  }, [current.counter, current.blink]);
 
   // const suffix = current.blink ? '_' : '';
   const suffix = '_';

@@ -34,9 +34,41 @@ const get = () => {
   return Storage.get(KEY);
 };
 
+const isValidHex = (hashImage: string) => {
+  if (!hashImage) return false;
+  for (let hashChar of hashImage.toLowerCase().split('')) {
+    switch (hashChar) {
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case 'a':
+      case 'b':
+      case 'c':
+      case 'd':
+      case 'e':
+      case 'f': {
+        // NOTE: ok continue, it breaks the switch not the for loop
+        break;
+      }
+      default: {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
 const syncIn = (hashImagesInput: string) => {
   init();
   const hashImages = hashImagesInput
+    .replace(/__/g, '')
     .replace(/(\r|\n|\t|\s)/g, ' ')
     .replace(/\s\s+/g, ' ')
     .split(' ');
@@ -44,7 +76,14 @@ const syncIn = (hashImagesInput: string) => {
 
   for (let index = 0; index < hashImages.length; index += 1) {
     const hashImage = hashImages[index];
-    tracklist[hashImage] = true;
+    if (
+      !!hashImage &&
+      hashImage.length >= 64 &&
+      hashImage.length <= 128 &&
+      isValidHex(hashImage)
+    ) {
+      tracklist[hashImage] = true;
+    }
   }
 
   Storage.set(KEY, tracklist);
